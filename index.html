@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khal - Bespoke Shoemaking</title>
     <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('./assets/fonts/poppins-regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +29,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Poppins', -webkit-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--light-color);
@@ -68,16 +75,20 @@
             text-decoration: none;
             transition: color 0.3s ease;
             cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
 
         .nav-links a:hover {
             color: var(--accent-color);
+            background: rgba(255,255,255,0.1);
         }
 
         .mobile-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            padding: 0.5rem;
         }
 
         .mobile-menu span {
@@ -86,6 +97,18 @@
             background: white;
             margin: 3px 0;
             transition: 0.3s;
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 6px);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -6px);
         }
 
         /* Page Sections */
@@ -143,13 +166,13 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
             animation: slideInUp 1s ease-out;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 2rem;
             animation: slideInUp 1s ease-out 0.3s both;
         }
@@ -160,7 +183,7 @@
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 30px;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             transition: all 0.3s ease;
             display: inline-block;
             animation: slideInUp 1s ease-out 0.6s both;
@@ -199,7 +222,7 @@
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1rem;
             position: relative;
         }
@@ -215,10 +238,15 @@
             background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
         }
 
+        .section-title p {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: var(--text-light);
+        }
+
         /* Catalogue Grid */
         .catalogue-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
@@ -262,7 +290,7 @@
 
         .shoe-image span {
             color: white;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
             font-weight: bold;
             padding: 1rem;
             z-index: 2;
@@ -280,11 +308,11 @@
         .shoe-card h3 {
             color: var(--dark-color);
             margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
         }
 
         .shoe-price {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             font-weight: bold;
             color: var(--secondary-color);
             margin: 1rem 0;
@@ -293,17 +321,19 @@
         .shoe-description {
             color: var(--text-light);
             margin-bottom: 1rem;
+            font-size: clamp(0.85rem, 2vw, 1rem);
         }
 
         .order-button {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .order-button:hover {
@@ -342,10 +372,15 @@
         .service-card h3 {
             color: var(--dark-color);
             margin-bottom: 1rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+
+        .service-card p {
+            font-size: clamp(0.85rem, 2vw, 1rem);
         }
 
         .service-price {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: var(--secondary-color);
             font-weight: bold;
             margin-top: 1rem;
@@ -354,7 +389,7 @@
         /* Apprenticeship Section */
         .apprenticeship-content {
             background: white;
-            padding: 3rem;
+            padding: clamp(2rem, 5vw, 3rem);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 3rem;
@@ -382,12 +417,17 @@
         .feature-text h4 {
             color: var(--dark-color);
             margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .feature-text p {
+            font-size: clamp(0.85rem, 2vw, 1rem);
         }
 
         /* Contact Form */
         .contact-form {
             background: white;
-            padding: 3rem;
+            padding: clamp(2rem, 5vw, 3rem);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 600px;
@@ -403,6 +443,7 @@
             margin-bottom: 0.5rem;
             color: var(--dark-color);
             font-weight: bold;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
         .form-group input,
@@ -412,8 +453,9 @@
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             transition: border-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
         }
 
         .form-group input:focus,
@@ -430,7 +472,7 @@
             padding: 15px 30px;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             width: 100%;
             transition: all 0.3s ease;
         }
@@ -466,56 +508,11 @@
         .footer-section h3 {
             color: var(--accent-color);
             margin-bottom: 1rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--dark-color);
-                flex-direction: column;
-                padding: 1rem 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .catalogue-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation classes */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
+        .footer-section p {
+            font-size: clamp(0.85rem, 2vw, 1rem);
         }
 
         /* Search Styles */
@@ -530,8 +527,9 @@
             padding: 15px 50px 15px 20px;
             border: 2px solid var(--accent-color);
             border-radius: 30px;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             outline: none;
+            font-family: 'Poppins', sans-serif;
         }
 
         .catalogue-search span {
@@ -541,6 +539,226 @@
             transform: translateY(-50%);
             font-size: 1.2rem;
             color: var(--accent-color);
+        }
+
+        /* Animation classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            /* Navigation */
+            nav {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-color);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            /* Hero section */
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .cta-button {
+                padding: 12px 24px;
+            }
+
+            /* Container padding */
+            .container {
+                padding: 1rem;
+            }
+
+            /* Section titles */
+            .section-title {
+                margin-bottom: 2rem;
+            }
+
+            /* Catalogue grid */
+            .catalogue-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .shoe-image {
+                height: 200px;
+            }
+
+            .shoe-card-content {
+                padding: 1rem;
+            }
+
+            /* Services grid */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            /* Apprenticeship features */
+            .apprentice-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            /* Footer */
+            .footer-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            /* Newsletter section */
+            .footer-content > div:first-child > div {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+
+            .footer-content input[type="email"] {
+                margin-bottom: 1rem !important;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            header {
+                padding: 0.5rem 0;
+            }
+
+            .page-section {
+                padding-top: 70px;
+            }
+
+            .hero {
+                height: 90vh;
+            }
+
+            .container {
+                padding: 0.5rem;
+            }
+
+            .catalogue-grid,
+            .services-grid {
+                gap: 1rem;
+            }
+
+            .shoe-card,
+            .service-card {
+                margin: 0 0.5rem;
+            }
+
+            .apprenticeship-content,
+            .contact-form {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Large mobile devices and small tablets */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .catalogue-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .apprentice-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Touch-friendly adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .shoe-card:hover,
+            .service-card:hover {
+                transform: none;
+            }
+
+            .shoe-card:active,
+            .service-card:active {
+                transform: scale(0.98);
+            }
+
+            .order-button:hover,
+            .submit-button:hover,
+            .cta-button:hover {
+                transform: none;
+            }
+
+            .order-button:active,
+            .submit-button:active,
+            .cta-button:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Improved readability on mobile */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+                line-height: 1.7;
+            }
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            .apprenticeship-content ul {
+                padding-left: 1rem;
+            }
+
+            .apprenticeship-content li {
+                margin-bottom: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -594,7 +812,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Classic Oxford</h3>
-                        <div class="shoe-price">N45,000</div>
+                        <div class="shoe-price">₦45,000</div>
                         <p class="shoe-description">Timeless elegance with premium leather and traditional construction. Perfect for formal occasions.</p>
                         <button class="order-button" onclick="orderShoe('Classic Oxford')">Order Now</button>
                     </div>
@@ -606,7 +824,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Handcrafted Derby</h3>
-                        <div class="shoe-price">N42,000</div>
+                        <div class="shoe-price">₦42,000</div>
                         <p class="shoe-description">Versatile and comfortable with open lacing system. Ideal for business and casual wear.</p>
                         <button class="order-button" onclick="orderShoe('Handcrafted Derby')">Order Now</button>
                     </div>
@@ -618,7 +836,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Wingtip Brogues</h3>
-                        <div class="shoe-price">N48,000</div>
+                        <div class="shoe-price">₦48,000</div>
                         <p class="shoe-description">Distinguished design with decorative perforations. A statement piece for the discerning gentleman.</p>
                         <button class="order-button" onclick="orderShoe('Wingtip Brogues')">Order Now</button>
                     </div>
@@ -630,7 +848,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Chelsea Boots</h3>
-                        <div class="shoe-price">N52,000</div>
+                        <div class="shoe-price">₦52,000</div>
                         <p class="shoe-description">Sleek ankle boots with elastic side panels. Modern style with traditional craftsmanship.</p>
                         <button class="order-button" onclick="orderShoe('Chelsea Boots')">Order Now</button>
                     </div>
@@ -642,7 +860,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Penny Loafers</h3>
-                        <div class="shoe-price">N39,000</div>
+                        <div class="shoe-price">₦39,000</div>
                         <p class="shoe-description">Slip-on convenience without compromising on style. Perfect for smart-casual occasions.</p>
                         <button class="order-button" onclick="orderShoe('Penny Loafers')">Order Now</button>
                     </div>
@@ -654,7 +872,7 @@
                     </div>
                     <div class="shoe-card-content">
                         <h3>Bespoke Creation</h3>
-                        <div class="shoe-price">From N65,000</div>
+                        <div class="shoe-price">From ₦65,000</div>
                         <p class="shoe-description">Your vision brought to life. Completely custom design tailored to your preferences and measurements.</p>
                         <button class="order-button" onclick="orderShoe('Bespoke Creation')">Consult Now</button>
                     </div>
@@ -673,45 +891,45 @@
 
             <div class="services-grid">
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">👟</span>
                     <h3>Shoe Repair</h3>
                     <p>Professional repair services to extend the life of your favorite shoes. We handle everything from sole replacement to upper restoration.</p>
-                    <div class="service-price">From N45,000</div>
+                    <div class="service-price">From ₦45,000</div>
                 </div>
 
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">✨</span>
                     <h3>Restoration</h3>
                     <p>Bring your vintage or damaged shoes back to life with our expert restoration techniques and attention to detail.</p>
-                    <div class="service-price">From N85,000</div>
+                    <div class="service-price">From ₦85,000</div>
                 </div>
 
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">📏</span>
                     <h3>Custom Fitting</h3>
                     <p>Professional measurement and fitting service to ensure your shoes fit perfectly and provide maximum comfort.</p>
-                    <div class="service-price">N35,000</div>
+                    <div class="service-price">₦35,000</div>
                 </div>
 
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">💡</span>
                     <h3>Design Consultation</h3>
                     <p>Work with our master craftsman to design your perfect pair of shoes, from concept to completion.</p>
-                    <div class="service-price">N75,000</div>
+                    <div class="service-price">₦75,000</div>
                 </div>
 
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">🧽</span>
                     <h3>Cleaning & Care</h3>
                     <p>Professional cleaning and conditioning service to keep your shoes looking their best year-round.</p>
-                    <div class="service-price">N25,000</div>
+                    <div class="service-price">₦25,000</div>
                 </div>
 
                 <div class="service-card animate-on-scroll">
-                    <span class="service-icon"></span>
+                    <span class="service-icon">🔧</span>
                     <h3>Resoling</h3>
                     <p>Complete sole replacement service using high-quality materials to give your shoes a new lease on life.</p>
-                    <div class="service-price">From N65,000</div>
+                    <div class="service-price">From ₦65,000</div>
                 </div>
             </div>
         </div>
@@ -786,7 +1004,7 @@
                     <h4 style="color: var(--dark-color); margin-bottom: 1rem;">Program Details:</h4>
                     <ul style="color: var(--text-light); list-style-position: inside;">
                         <li><strong>Duration:</strong> 18 months (part-time evening classes available)</li>
-                        <li><strong>Cost:</strong> N350,000 (payment plans available)</li>
+                        <li><strong>Cost:</strong> ₦350,000 (payment plans available)</li>
                         <li><strong>Class Size:</strong> Maximum 6 students for personalized attention</li>
                         <li><strong>Requirements:</strong> No prior experience necessary, just passion and dedication</li>
                         <li><strong>Certification:</strong> Accredited certificate upon completion</li>
@@ -856,8 +1074,8 @@
                 <h3 style="margin-bottom: 1rem; color: white;">Stay Updated</h3>
                 <p style="margin-bottom: 1.5rem; color: var(--light-color);">Subscribe to our newsletter for updates on new collections and apprenticeship openings.</p>
                 <div style="display: flex; max-width: 400px; margin: 0 auto; gap: 10px;">
-                    <input type="email" id="newsletterEmail" placeholder="Enter your email" style="flex: 1; padding: 12px; border: none; border-radius: 25px; outline: none;">
-                    <button onclick="subscribeNewsletter()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;">Subscribe</button>
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" style="flex: 1; padding: 12px; border: none; border-radius: 25px; outline: none; font-family: 'Poppins', sans-serif;">
+                    <button onclick="subscribeNewsletter()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif;">Subscribe</button>
                 </div>
             </div>
 
@@ -900,6 +1118,10 @@
 
             document.getElementById(pageId).classList.add('active');
             document.getElementById('navLinks').classList.remove('active');
+            document.querySelector('.mobile-menu').classList.remove('active');
+
+            // Close mobile menu when page changes
+            window.scrollTo(0, 0);
 
             setTimeout(() => {
                 animateOnScroll();
@@ -909,8 +1131,22 @@
         // Mobile menu toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
+            const mobileMenu = document.querySelector('.mobile-menu');
             navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
         }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
 
         // Scroll animations
         function animateOnScroll() {
@@ -943,6 +1179,14 @@
             } else {
                 alert('Please enter a valid email address.');
             }
+        }
+
+        // Smooth scroll for better mobile experience
+        function smoothScroll(target) {
+            document.querySelector(target).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
         // Initialize when page loads
@@ -1007,44 +1251,129 @@
                 }
             });
 
-            // Add hover effects to cards
+            // Enhanced mobile touch interactions
             const cards = document.querySelectorAll('.shoe-card, .service-card');
             cards.forEach(card => {
+                // Touch start and end for mobile
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+
+                // Mouse events for desktop
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    if (window.matchMedia('(hover: hover)').matches) {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    }
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
+                    if (window.matchMedia('(hover: hover)').matches) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
                 });
             });
 
-            // Typing effect for hero text
-            const heroText = document.querySelector('.hero p');
-            const originalText = heroText.textContent;
-            heroText.textContent = '';
-            
-            let i = 0;
-            function typeWriter() {
-                if (i < originalText.length) {
-                    heroText.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
+            // Typing effect for hero text (only on larger screens for performance)
+            if (window.innerWidth > 768) {
+                const heroText = document.querySelector('.hero p');
+                const originalText = heroText.textContent;
+                heroText.textContent = '';
+                
+                let i = 0;
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        heroText.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
                 }
+                
+                setTimeout(typeWriter, 1500);
             }
-            
-            setTimeout(typeWriter, 1500);
 
-            // Add click effects to buttons
+            // Enhanced button interactions
             document.querySelectorAll('button, .cta-button, .nav-links a').forEach(element => {
-                element.addEventListener('click', function() {
+                element.addEventListener('touchstart', function() {
                     this.style.transform = 'scale(0.95)';
+                });
+                
+                element.addEventListener('touchend', function() {
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
                 });
+
+                element.addEventListener('click', function() {
+                    if (window.matchMedia('(hover: hover)').matches) {
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+
+            // Prevent zoom on input focus (mobile)
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    const viewport = document.querySelector('meta[name=viewport]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                });
+                
+                input.addEventListener('blur', function() {
+                    const viewport = document.querySelector('meta[name=viewport]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                });
+            });
+
+            // Optimize performance for mobile
+            let ticking = false;
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(animateOnScroll);
+                    ticking = true;
+                    setTimeout(() => { ticking = false; }, 100);
+                }
+            }
+
+            // Throttle scroll events on mobile
+            if (window.innerWidth <= 768) {
+                window.removeEventListener('scroll', animateOnScroll);
+                window.addEventListener('scroll', requestTick);
+            }
+
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                    animateOnScroll();
+                }, 100);
             });
         });
+
+        // Lazy loading for images (mobile optimization)
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.shoe-image').forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s';
+                imageObserver.observe(img);
+            });
+        }
     </script>
 </body>
 </html>
