@@ -4,806 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khal - Bespoke Shoemaking</title>
-    <style>
-        @font-face {
-            font-family: 'Poppins';
-            src: url('./assets/fonts/poppins-regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #8B4513; /* Saddle brown */
-            --secondary-color: #D2691E; /* Chocolate */
-            --accent-color: #F4A261; /* Sandy brown */
-            --dark-color: #4A2C0A; /* Darker brown */
-            --light-color: #FDF6E3; /* Softer cream */
-            --text-dark: #2D1B0A; /* Near-black brown */
-            --text-light: #5C4033; /* Muted brown */
-        }
-
-        body {
-            font-family: 'Poppins', -webkit-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--light-color);
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        .mobile-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(9px, 6px);
-        }
-
-        .mobile-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(9px, -6px);
-        }
-
-        /* Page Sections */
-        .page-section {
-            display: none;
-            min-height: 100vh;
-            padding-top: 80px;
-            animation: fadeIn 0.6s ease-in;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Home Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* Minimal dark overlay */
-            z-index: 1;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 500%; /* 5 images, each taking 100% width */
-            height: 100%;
-            display: flex;
-            animation: slideHorizontal 25s infinite ease-in-out;
-            z-index: 0;
-        }
-
-        .hero-background div {
-            width: 20%; /* Each image takes 1/5 of the container */
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-background div:nth-child(1) {
-            background-image: url('./assets/images/shoes/khal5.jpg');
-        }
-
-        .hero-background div:nth-child(2) {
-            background-image: url('./assets/images/shoes/khal5.jpg');
-        }
-
-        .hero-background div:nth-child(3) {
-            background-image: url('./assets/images/shoes/khal5.jpg');
-        }
-
-        .hero-background div:nth-child(4) {
-            background-image: url('./assets/images/shoes/khal5.jpg');
-        }
-
-        .hero-background div:nth-child(5) {
-            background-image: url('./assets/images/shoes/khal5.jpg');
-        }
-
-        @keyframes slideHorizontal {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(0); }
-            25% { transform: translateX(-20%); }
-            45% { transform: translateX(-20%); }
-            50% { transform: translateX(-40%); }
-            70% { transform: translateX(-40%); }
-            75% { transform: translateX(-60%); }
-            95% { transform: translateX(-60%); }
-            100% { transform: translateX(-80%); }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-bottom: 2rem;
-            animation: slideInUp 1s ease-out 0.3s both;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            transition: all 0.3s ease;
-            display: inline-block;
-            animation: slideInUp 1s ease-out 0.6s both;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--dark-color);
-        }
-
-        .section-title h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-        }
-
-        .section-title p {
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            color: var(--text-light);
-        }
-
-        /* Catalogue Grid */
-        .catalogue-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .shoe-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .shoe-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .shoe-image {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shoe-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
-            z-index: 1;
-        }
-
-        .shoe-image span {
-            color: white;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            font-weight: bold;
-            padding: 1rem;
-            z-index: 2;
-            position: relative;
-            background: rgba(0,0,0,0.3);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .shoe-card-content {
-            padding: 1.5rem;
-        }
-
-        .shoe-card h3 {
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        }
-
-        .shoe-price {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin: 1rem 0;
-        }
-
-        .shoe-description {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-
-        .order-button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .order-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        }
-
-        .service-card p {
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-
-        .service-price {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        /* Apprenticeship Section */
-        .apprenticeship-content {
-            background: white;
-            padding: clamp(2rem, 5vw, 3rem);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
-        }
-
-        .apprentice-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-        }
-
-        .feature-text p {
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background: white;
-            padding: clamp(2rem, 5vw, 3rem);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-            font-weight: bold;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            transition: border-color 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
-
-        .submit-button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .footer-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        }
-
-        .footer-section p {
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-
-        /* Search Styles */
-        .catalogue-search {
-            max-width: 500px;
-            margin: 0 auto 3rem auto;
-            position: relative;
-        }
-
-        .catalogue-search input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: 2px solid var(--accent-color);
-            border-radius: 30px;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            outline: none;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .catalogue-search span {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            color: var(--accent-color);
-        }
-
-        /* Animation classes */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--dark-color);
-                flex-direction: column;
-                padding: 1rem 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 1rem 2rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero-content {
-                padding: 1rem;
-            }
-
-            .cta-button {
-                padding: 12px 24px;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .section-title {
-                margin-bottom: 2rem;
-            }
-
-            .catalogue-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .shoe-image {
-                height: 200px;
-            }
-
-            .shoe-card-content {
-                padding: 1rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .service-card {
-                padding: 1.5rem;
-            }
-
-            .apprentice-features {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .feature-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
-            }
-
-            .footer-info {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .footer-content > div:first-child > div {
-                flex-direction: column !important;
-                gap: 1rem !important;
-            }
-
-            .footer-content input[type="email"] {
-                margin-bottom: 1rem !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 0.5rem 0;
-            }
-
-            .page-section {
-                padding-top: 70px;
-            }
-
-            .hero {
-                height: 90vh;
-            }
-
-            .container {
-                padding: 0.5rem;
-            }
-
-            .catalogue-grid,
-            .services-grid {
-                gap: 1rem;
-            }
-
-            .shoe-card,
-            .service-card {
-                margin: 0 0.5rem;
-            }
-
-            .apprenticeship-content,
-            .contact-form {
-                padding: 1.5rem;
-                margin: 0 0.5rem;
-            }
-
-            .footer-content {
-                padding: 0 1rem;
-            }
-        }
-
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .catalogue-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .apprentice-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .shoe-card:hover,
-            .service-card:hover {
-                transform: none;
-            }
-
-            .shoe-card:active,
-            .service-card:active {
-                transform: scale(0.98);
-            }
-
-            .order-button:hover,
-            .submit-button:hover,
-            .cta-button:hover {
-                transform: none;
-            }
-
-            .order-button:active,
-            .submit-button:active,
-            .cta-button:active {
-                transform: scale(0.95);
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                font-size: 16px;
-                line-height: 1.7;
-            }
-
-            p {
-                margin-bottom: 1rem;
-            }
-
-            .apprenticeship-content ul {
-                padding-left: 1rem;
-            }
-
-            .apprenticeship-content li {
-                margin-bottom: 0.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="#" class="logo">Khal</a>
+            <a href="index.html" class="logo">Khal</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#" onclick="showPage('home')">Home</a></li>
-                <li><a href="#" onclick="showPage('catalogue')">Catalogue</a></li>
-                <li><a href="#" onclick="showPage('services')">Services</a></li>
-                <li><a href="#" onclick="showPage('apprenticeship')">Apprenticeship</a></li>
-                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pages/catalogue.html">Catalogue</a></li>
+                <li><a href="pages/services.html">Services</a></li>
+                <li><a href="pages/apprenticeship.html">Apprenticeship</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
             </ul>
-            <div class="mobile-menu" onclick="toggleMobileMenu()">
+            <div class="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -811,8 +25,8 @@
         </nav>
     </header>
 
-    <section id="home" class="page-section active">
-        <div class="hero">
+    <main>
+        <section class="hero">
             <div class="hero-background">
                 <div></div>
                 <div></div>
@@ -822,285 +36,125 @@
             </div>
             <div class="hero-content">
                 <h1>Khal Designs</h1>
-                <p>Where tradition meets excellence.</p>
-                <button class="cta-button" onclick="showPage('catalogue')">Explore Our Collection</button>
+                <p>Giving your feet a deserving comfort.</p>
+                <a href="pages/catalogue.html" class="cta-button">Explore Our Collection</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="catalogue" class="page-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Our Shoe Collection</h2>
-                <p>Each pair is meticulously handcrafted using traditional techniques and premium materials</p>
-            </div>
-
-            <div class="catalogue-search animate-on-scroll">
-                <input type="text" id="catalogueSearch" placeholder="Search shoes...">
-                <span></span>
-            </div>
-
-            <div class="catalogue-grid">
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal.jpg')">
-                        <span>Classic Oxford</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Classic Oxford</h3>
-                        <div class="shoe-price">₦45,000</div>
-                        <p class="shoe-description">Timeless elegance with premium leather and traditional construction. Perfect for formal occasions.</p>
-                        <button class="order-button" onclick="orderShoe('Classic Oxford')">Order Now</button>
-                    </div>
+        <section class="about-section">
+            <div class="container">
+                <div class="section-title animate-on-scroll">
+                    <h2>Master Craftmanship</h2>
+                    <p>Traditional techniques meet modern comfort in every pair we create</p>
                 </div>
-                <!-- Other shoe cards remain unchanged -->
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal1.jpg')">
-                        <span>Derby Shoes</span>
+                
+                <div class="about-content animate-on-scroll">
+                    <div class="about-text">
+                        <h3>Our Heritage</h3>
+                        <p>At Khal Designs, we honor the time-tested traditions of bespoke shoemaking while embracing modern innovations in comfort and durability. Each pair of shoes is individually crafted to your exact measurements and specifications.</p>
+                        
+                        <h3>Why Choose Bespoke</h3>
+                        <p>Unlike mass-produced footwear, our bespoke shoes are designed specifically for your feet, ensuring unparalleled comfort, perfect fit, and exceptional longevity. Every detail is considered, from the leather selection to the final polish.</p>
                     </div>
-                    <div class="shoe-card-content">
-                        <h3>Handcrafted Derby</h3>
-                        <div class="shoe-price">₦42,000</div>
-                        <p class="shoe-description">Versatile and comfortable with open lacing system. Ideal for business and casual wear.</p>
-                        <button class="order-button" onclick="orderShoe('Handcrafted Derby')">Order Now</button>
-                    </div>
-                </div>
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal6.jpg')">
-                        <span>Brogues</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Wingtip Brogues</h3>
-                        <div class="shoe-price">₦48,000</div>
-                        <p class="shoe-description">Distinguished design with decorative perforations. A statement piece for the discerning gentleman.</p>
-                        <button class="order-button" onclick="orderShoe('Wingtip Brogues')">Order Now</button>
-                    </div>
-                </div>
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal7.jpg')">
-                        <span>Boots</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Chelsea Boots</h3>
-                        <div class="shoe-price">₦52,000</div>
-                        <p class="shoe-description">Sleek ankle boots with elastic side panels. Modern style with traditional craftsmanship.</p>
-                        <button class="order-button" onclick="orderShoe('Chelsea Boots')">Order Now</button>
-                    </div>
-                </div>
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal8.jpg')">
-                        <span>Loafers</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Penny Loafers</h3>
-                        <div class="shoe-price">₦39,000</div>
-                        <p class="shoe-description">Slip-on convenience without compromising on style. Perfect for smart-casual occasions.</p>
-                        <button class="order-button" onclick="orderShoe('Penny Loafers')">Order Now</button>
-                    </div>
-                </div>
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('./assets/images/shoes/khal.jpg')">
-                        <span>Custom Design</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Bespoke Creation</h3>
-                        <div class="shoe-price">From ₦65,000</div>
-                        <p class="shoe-description">Your vision brought to life. Completely custom design tailored to your preferences and measurements.</p>
-                        <button class="order-button" onclick="orderShoe('Bespoke Creation')">Consult Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="page-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Our Services</h2>
-                <p>Complete shoe care and craftsmanship services</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">👟</span>
-                    <h3>Shoe Repair</h3>
-                    <p>Professional repair services to extend the life of your favorite shoes. We handle everything from sole replacement to upper restoration.</p>
-                    <div class="service-price">From ₦45,000</div>
-                </div>
-                <!-- Other service cards remain unchanged -->
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">✨</span>
-                    <h3>Restoration</h3>
-                    <p>Bring your vintage or damaged shoes back to life with our expert restoration techniques and attention to detail.</p>
-                    <div class="service-price">From ₦85,000</div>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">📏</span>
-                    <h3>Custom Fitting</h3>
-                    <p>Professional measurement and fitting service to ensure your shoes fit perfectly and provide maximum comfort.</p>
-                    <div class="service-price">₦35,000</div>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">💡</span>
-                    <h3>Design Consultation</h3>
-                    <p>Work with our master craftsman to design your perfect pair of shoes, from concept to completion.</p>
-                    <div class="service-price">₦75,000</div>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">🧽</span>
-                    <h3>Cleaning & Care</h3>
-                    <p>Professional cleaning and conditioning service to keep your shoes looking their best year-round.</p>
-                    <div class="service-price">₦25,000</div>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <span class="service-icon">🔧</span>
-                    <h3>Resoling</h3>
-                    <p>Complete sole replacement service using high-quality materials to give your shoes a new lease on life.</p>
-                    <div class="service-price">From ₦65,000</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="apprenticeship" class="page-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Apprenticeship Program</h2>
-                <p>Learn the ancient art of shoemaking from a master craftsman</p>
-            </div>
-
-            <div class="apprenticeship-content animate-on-scroll">
-                <h3 style="color: var(--dark-color); margin-bottom: 1rem;">Join Our Apprenticeship Program</h3>
-                <p style="margin-bottom: 2rem; color: var(--text-light);">
-                    Our comprehensive apprenticeship program offers hands-on training in traditional shoemaking techniques. 
-                    Learn from decades of experience and master the craft that has been passed down through generations.
-                </p>
-
-                <div class="apprentice-features">
-                    <div class="feature-item">
-                        <span class="feature-icon">📚</span>
-                        <div class="feature-text">
-                            <h4>Comprehensive Training</h4>
-                            <p>18-month program covering all aspects of traditional shoemaking</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 5.16-1 9-5.45 9-11V7l-10-5z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Premium Materials</h4>
+                                <p>Only the finest leathers and materials sourced from trusted suppliers</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Other feature items remain unchanged -->
-                    <div class="feature-item">
-                        <span class="feature-icon">🛠️</span>
-                        <div class="feature-text">
-                            <h4>Hands-On Experience</h4>
-                            <p>Work with real projects and learn by doing, not just theory</p>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Timeless Craftsmanship</h4>
+                                <p>Traditional hand-stitching techniques passed down through generations</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">👨‍🏫</span>
-                        <div class="feature-text">
-                            <h4>Master Guidance</h4>
-                            <p>One-on-one mentoring from our experienced master craftsman</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🎓</span>
-                        <div class="feature-text">
-                            <h4>Certification</h4>
-                            <p>Receive official certification upon successful completion</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🔧</span>
-                        <div class="feature-text">
-                            <h4>Tool Training</h4>
-                            <p>Learn to use traditional tools and modern equipment</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">💼</span>
-                        <div class="feature-text">
-                            <h4>Business Skills</h4>
-                            <p>Learn the business side of running a shoemaking enterprise</p>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Perfect Fit Guarantee</h4>
+                                <p>Multiple fittings ensure your shoes fit perfectly from day one</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div style="background: var(--light-color); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
-                    <h4 style="color: var(--dark-color); margin-bottom: 1rem;">Program Details:</h4>
-                    <ul style="color: var(--text-light); list-style-position: inside;">
-                        <li><strong>Duration:</strong> 18 months (part-time evening classes available)</li>
-                        <li><strong>Cost:</strong> ₦350,000 (payment plans available)</li>
-                        <li><strong>Class Size:</strong> Maximum 6 students for personalized attention</li>
-                        <li><strong>Requirements:</strong> No prior experience necessary, just passion and dedication</li>
-                        <li><strong>Certification:</strong> Accredited certificate upon completion</li>
-                        <li><strong>Job Placement:</strong> Assistance with job placement and business setup</li>
-                    </ul>
+        <section class="preview-section">
+            <div class="container">
+                <div class="section-title animate-on-scroll">
+                    <h2>Featured Collection</h2>
+                    <p>A glimpse of our most popular handcrafted designs</p>
                 </div>
-
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="cta-button" onclick="showPage('contact')">Apply for Apprenticeship</button>
+                
+                <div class="preview-grid">
+                    <div class="preview-card animate-on-scroll">
+                        <div class="preview-image" style="background-image: url('./assets/images/shoes/khal.jpg')"></div>
+                        <div class="preview-content">
+                            <h3>Classic Oxford</h3>
+                            <p>Timeless elegance meets modern comfort</p>
+                            <div class="preview-price">From ₦45,000</div>
+                        </div>
+                    </div>
+                    <div class="preview-card animate-on-scroll">
+                        <div class="preview-image" style="background-image: url('./assets/images/shoes/khal1.jpg')"></div>
+                        <div class="preview-content">
+                            <h3>Chelsea Boots</h3>
+                            <p>Contemporary style with traditional craftsmanship</p>
+                            <div class="preview-price">From ₦52,000</div>
+                        </div>
+                    </div>
+                    <div class="preview-card animate-on-scroll">
+                        <div class="preview-image" style="background-image: url('./assets/images/shoes/khal6.jpg')"></div>
+                        <div class="preview-content">
+                            <h3>Wingtip Brogues</h3>
+                            <p>Distinguished design for the discerning gentleman</p>
+                            <div class="preview-price">From ₦48,000</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preview-cta">
+                    <a href="pages/catalogue.html" class="cta-button">View Full Collection</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact" class="page-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your custom shoe journey or have questions? Contact us today.</p>
-            </div>
-
-            <div class="contact-form animate-on-scroll">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service Interest</label>
-                        <select id="service" name="service" required>
-                            <option value="">Select a service</option>
-                            <option value="bespoke">Bespoke Shoes</option>
-                            <option value="repair">Shoe Repair</option>
-                            <option value="restoration">Restoration</option>
-                            <option value="apprenticeship">Apprenticeship Program</option>
-                            <option value="consultation">Design Consultation</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your project or ask any questions..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-content">
-            <div style="background: var(--primary-color); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
-                <h3 style="margin-bottom: 1rem; color: white;">Stay Updated</h3>
-                <p style="margin-bottom: 1.5rem; color: var(--light-color);">Subscribe to our newsletter for updates on new collections and apprenticeship openings.</p>
-                <div style="display: flex; max-width: 400px; margin: 0 auto; gap: 10px;">
-                    <input type="email" id="newsletterEmail" placeholder="Enter your email" style="flex: 1; padding: 12px; border: none; border-radius: 25px; outline: none; font-family: 'Poppins', sans-serif;">
-                    <button onclick="subscribeNewsletter()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif;">Subscribe</button>
+            <div class="newsletter-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for updates on new collections and apprenticeship openings.</p>
+                <div class="newsletter-form">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email">
+                    <button type="button">Subscribe</button>
                 </div>
             </div>
 
             <div class="footer-info">
                 <div class="footer-section">
                     <h3>Contact Info</h3>
-                    <p>📍 39 Moloney street by Herbert Macaulay<br>
+                    <p>39 Moloney street by Herbert Macaulay<br>
                     Adekunle, sabo yaba Lagos</p>
-                    <p>📞 (234) 8147994796<br>
-                    ✉️ vezenachukwu@gmail.com</p>
+                    <p>(234) 8147994796<br>
+                    vezenachukwu@gmail.com</p>
                 </div>
                 <div class="footer-section">
                     <h3>Workshop Hours</h3>
@@ -1111,260 +165,20 @@
                 <div class="footer-section">
                     <h3>Follow Us</h3>
                     <p>Stay connected for updates on new collections and apprenticeship openings.</p>
-                    <p>Facebook | Instagram | LinkedIn</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                        <a href="#" aria-label="Instagram">Instagram</a>
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                    </div>
                 </div>
             </div>
-
-            <div style="border-top: 1px solid var(--primary-color); padding-top: 1rem; margin-top: 2rem;">
+                    
+            <div class="footer-bottom">
                 <p>&copy; 2025 Khal. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Navigation functionality
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-
-            document.getElementById(pageId).classList.add('active');
-            document.getElementById('navLinks').classList.remove('active');
-            document.querySelector('.mobile-menu').classList.remove('active');
-
-            window.scrollTo(0, 0);
-
-            setTimeout(() => {
-                animateOnScroll();
-            }, 100);
-        }
-
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        }
-
-        document.addEventListener('click', function(event) {
-            const nav = document.querySelector('nav');
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            }
-        });
-
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('animated');
-                }
-            });
-        }
-
-        function orderShoe(shoeName) {
-            alert(`Thank you for your interest in ${shoeName}! Please contact us through the contact page to discuss customization options, measurements, and delivery timeline.`);
-            showPage('contact');
-        }
-
-        function subscribeNewsletter() {
-            const emailInput = document.getElementById('newsletterEmail');
-            const email = emailInput.value.trim();
-            
-            if (email && email.includes('@')) {
-                alert(`Thank you! You've been subscribed to our newsletter with email: ${email}`);
-                emailInput.value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        }
-
-        function smoothScroll(target) {
-            document.querySelector(target).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contactForm');
-            
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(contactForm);
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
-                
-                const submitButton = contactForm.querySelector('.submit-button');
-                const originalText = submitButton.textContent;
-                
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
-                
-                setTimeout(() => {
-                    alert(`Thank you ${data.name}! Your message has been received. We'll get back to you within 24 hours regarding your ${data.service} inquiry.`);
-                    contactForm.reset();
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                }, 2000);
-            });
-
-            document.getElementById('catalogueSearch').addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                const shoeCards = document.querySelectorAll('.shoe-card');
-                
-                shoeCards.forEach(card => {
-                    const shoeName = card.querySelector('h3').textContent.toLowerCase();
-                    const shoeDescription = card.querySelector('.shoe-description').textContent.toLowerCase();
-                    
-                    if (shoeName.includes(searchTerm) || shoeDescription.includes(searchTerm)) {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeIn 0.5s ease';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-
-            animateOnScroll();
-            window.addEventListener('scroll', animateOnScroll);
-
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(74, 44, 10, 0.95)';
-                    header.style.backdropFilter = 'blur(10px)';
-                } else {
-                    header.style.background = 'linear-gradient(135deg, var(--dark-color), var(--primary-color))';
-                    header.style.backdropFilter = 'none';
-                }
-            });
-
-            const cards = document.querySelectorAll('.shoe-card, .service-card');
-            cards.forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.98)';
-                });
-                
-                card.addEventListener('touchend', function() {
-                    this.style.transform = '';
-                });
-
-                card.addEventListener('mouseenter', function() {
-                    if (window.matchMedia('(hover: hover)').matches) {
-                        this.style.transform = 'translateY(-10px) scale(1.02)';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    if (window.matchMedia('(hover: hover)').matches) {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    }
-                });
-            });
-
-            if (window.innerWidth > 768) {
-                const heroText = document.querySelector('.hero p');
-                const originalText = heroText.textContent;
-                heroText.textContent = '';
-                
-                let i = 0;
-                function typeWriter() {
-                    if (i < originalText.length) {
-                        heroText.textContent += originalText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
-                    }
-                }
-                
-                setTimeout(typeWriter, 1500);
-            }
-
-            document.querySelectorAll('button, .cta-button, .nav-links a').forEach(element => {
-                element.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-                
-                element.addEventListener('touchend', function() {
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                });
-
-                element.addEventListener('click', function() {
-                    if (window.matchMedia('(hover: hover)').matches) {
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 150);
-                    }
-                });
-            });
-
-            const inputs = document.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    const viewport = document.querySelector('meta[name=viewport]');
-                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-                });
-                
-                input.addEventListener('blur', function() {
-                    const viewport = document.querySelector('meta[name=viewport]');
-                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-                });
-            });
-
-            let ticking = false;
-            function requestTick() {
-                if (!ticking) {
-                    requestAnimationFrame(animateOnScroll);
-                    ticking = true;
-                    setTimeout(() => { ticking = false; }, 100);
-                }
-            }
-
-            if (window.innerWidth <= 768) {
-                window.removeEventListener('scroll', animateOnScroll);
-                window.addEventListener('scroll', requestTick);
-            }
-
-            window.addEventListener('orientationchange', function() {
-                setTimeout(() => {
-                    window.scrollTo(0, 0);
-                    animateOnScroll();
-                }, 100);
-            });
-        });
-
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.style.opacity = '1';
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('.shoe-image').forEach(img => {
-                img.style.opacity = '0';
-                img.style.transition = 'opacity 0.3s';
-                imageObserver.observe(img);
-            });
-        }
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
