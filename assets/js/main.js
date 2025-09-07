@@ -187,14 +187,19 @@ function updateSocialMediaLinks() {
     
     socialLinksContainers.forEach(container => {
         container.innerHTML = `
-            <a href="https://web.facebook.com/khal.designs" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Follow us on Facebook">
+            <a href="https://www.facebook.com/share/1Bh5D29qJY/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Follow us on Facebook">
                 <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.847-.374 1.282v1.767h3.053L15.22 15.71h-2.53v7.98H9.101z"/>
                 </svg>
             </a>
-            <a href="https://instagram.com/khal.designs" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Follow us on Instagram">
+            <a href="https://www.instagram.com/khal_designs/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Follow us on Instagram">
                 <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3z"/>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@khal_designs?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="tiktok" aria-label="Follow us on TikTok">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
             </a>
             <a href="${generateWhatsAppURL('Hello Khal Designs! I found you through your website.')}" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Chat with us on WhatsApp">

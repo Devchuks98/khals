@@ -616,7 +616,7 @@ footer {
 /* Social Links */
 .social-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-top: 1rem;
     justify-content: center;
 }
@@ -625,50 +625,61 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .social-links a.facebook {
-    background: #1877F2;
-    color: white;
+    color: #1877F2;
 }
 
 .social-links a.facebook:hover {
-    background: #166FE5;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+    background: rgba(24, 119, 242, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
 }
 
 .social-links a.instagram {
-    background: linear-gradient(45deg, #E1306C, #FD1D1D, #F77737, #FCAF45);
-    color: white;
+    color: #E1306C;
 }
 
 .social-links a.instagram:hover {
-    background: linear-gradient(45deg, #C13584, #E1306C, #FD1D1D, #F77737);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.4);
+    background: rgba(225, 48, 108, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
+}
+
+.social-links a.tiktok {
+    color: #000000;
+}
+
+.social-links a.tiktok:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: var(--white);
 }
 
 .social-links a.whatsapp {
-    background: #25D366;
-    color: white;
+    color: #25D366;
 }
 
 .social-links a.whatsapp:hover {
-    background: #128C7E;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    background: rgba(37, 211, 102, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
 .social-icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     fill: currentColor;
     transition: transform 0.3s ease;
 }
@@ -685,14 +696,14 @@ footer {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s;
 }
 
 .social-links a:active::after {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
 }
 
 /* WhatsApp Float */
@@ -892,13 +903,13 @@ a:focus {
     }
 
     .social-links a {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
     }
 
     .social-icon {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -936,6 +947,16 @@ a:focus {
 
     .footer-content {
         padding: 0 1rem;
+    }
+
+    .social-links a {
+        width: 28px;
+        height: 28px;
+    }
+
+    .social-icon {
+        width: 14px;
+        height: 14px;
     }
 }
 
