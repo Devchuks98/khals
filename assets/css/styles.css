@@ -473,9 +473,6 @@ main {
 
 .shoe-card-content {
     text-align: left;
-}
-
-.shoe-card-content {
     padding: 1.5rem;
 }
 
@@ -530,40 +527,350 @@ main {
     margin: 2rem 0;
 }
 
+/* Modern Program Details Styles */
 .program-details {
-    background: var(--light-color);
-    padding: 2rem;
-    border-radius: 10px;
-    margin: 2rem 0;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin: 3rem 0;
 }
 
 .program-details h4 {
     color: var(--dark-color);
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
-.program-details ul {
+/* Program cards container */
+.program-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Individual program cards */
+.program-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(139, 69, 19, 0.12);
+}
+
+/* Program header with duration */
+.program-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.program-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--secondary-color);
+}
+
+.program-duration {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.program-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0.5rem 0 0 0;
+}
+
+/* Program content */
+.program-content {
+    padding: 2rem 1.5rem 1.5rem;
+}
+
+/* Pricing list */
+.program-pricing {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.program-pricing li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+}
+
+.program-pricing li:last-child {
+    border-bottom: none;
+}
+
+.pricing-label {
     color: var(--text-light);
-    list-style-position: inside;
+    font-weight: 500;
 }
 
-.program-details li {
+.pricing-amount {
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+/* Total pricing highlight */
+.program-total {
+    background: var(--light-color);
+    margin: 1rem -1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-top: 2px solid var(--accent-color);
+}
+
+.program-total .pricing-label {
+    color: var(--dark-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.program-total .pricing-amount {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Program features */
+.program-features {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Popular badge */
+.program-card.popular {
+    border: 2px solid var(--accent-color);
+    transform: scale(1.02);
+}
+
+.program-card.popular::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transform: rotate(45deg);
+    z-index: 10;
+}
+
+/* Accommodation info box */
+.accommodation-info {
+    background: linear-gradient(135deg, #fff9e6, #fef3cd);
+    border: none;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 10px rgba(244, 162, 97, 0.1);
+}
+
+.accommodation-info h5 {
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.accommodation-info h5::before {
+    content: '🏠';
+    font-size: 1.3rem;
+}
+
+.accommodation-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.accommodation-info li {
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
 }
 
-/* Application Buttons */
-.whatsapp-apply-btn:hover,
-.email-apply-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+.accommodation-info li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: bold;
 }
 
-.whatsapp-apply-btn:hover {
-    background: #128C7E !important;
+/* General program info */
+.general-info {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
-.email-apply-btn:hover {
-    background: var(--primary-color) !important;
+.general-info h4 {
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.general-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.general-info li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.general-info li:hover {
+    background: #f8f4e6;
+}
+
+.general-info li::before {
+    content: '●';
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--dark-color);
+    min-width: 120px;
+}
+
+.info-content {
+    color: var(--text-light);
+    flex: 1;
+}
+
+/* Apply section improvements */
+.apply-section {
+    background: linear-gradient(135deg, var(--light-color), #f8f4e6);
+    border: none;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.apply-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.apply-section h4 {
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.apply-section p {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.apply-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.apply-buttons button {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    min-width: 200px;
+    justify-content: center;
+}
+
+.apply-buttons button.email-apply-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+}
+
+.apply-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.apply-buttons button.email-apply-btn:hover {
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
 }
 
 /* Search Styles */
@@ -918,6 +1225,46 @@ a:focus {
         flex-direction: column;
         text-align: center;
         gap: 0.5rem;
+    }
+
+    .program-cards-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .program-card.popular {
+        transform: none;
+        border-width: 1px;
+    }
+    
+    .program-header {
+        padding: 1.25rem;
+    }
+    
+    .program-content {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .apply-section {
+        padding: 2rem 1rem;
+        margin: 2rem 0.5rem 0;
+    }
+    
+    .apply-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .apply-buttons button {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .accommodation-info,
+    .general-info {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 1.25rem;
     }
 
     .footer-info {
