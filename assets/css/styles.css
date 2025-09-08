@@ -56,10 +56,43 @@ nav {
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+    transition: all 0.3s ease;
+    filter: brightness(1.1);
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* Logo size variants for different screen sizes */
+@media (max-width: 768px) {
+    .logo img {
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        height: 30px;
+    }
+}
+
+/* Large screens - bigger logo */
+@media (min-width: 1200px) {
+    .logo img {
+        height: 50px;
+    }
 }
 
 .nav-links {
@@ -814,10 +847,6 @@ a:focus {
 @media (max-width: 768px) {
     nav {
         padding: 0 1rem;
-    }
-
-    .logo {
-        font-size: 1.5rem;
     }
 
     .nav-links {
