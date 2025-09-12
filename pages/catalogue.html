@@ -33,6 +33,18 @@
                 <p>Each pair is meticulously handcrafted using traditional techniques and premium materials</p>
             </div>
 
+            <!-- Category Tabs -->
+            <div class="category-tabs animate-on-scroll">
+                <button class="category-tab active" data-category="all">All Shoes</button>
+                <button class="category-tab" data-category="men-slides">Men Slides</button>
+                <button class="category-tab" data-category="women-slides">Women Slides</button>
+                <button class="category-tab" data-category="formal">Formal Shoes</button>
+                <button class="category-tab" data-category="casual">Casual Shoes</button>
+                <button class="category-tab" data-category="sandals">Sandals</button>
+                <button class="category-tab" data-category="accessories">Accessories</button>
+            </div>
+
+            <!-- Search remains for all categories -->
             <div class="catalogue-search animate-on-scroll">
                 <input type="text" id="catalogueSearch" placeholder="Search shoes..." aria-label="Search shoes">
                 <span class="search-icon" aria-hidden="true">
@@ -43,8 +55,11 @@
                 </span>
             </div>
 
+            <!-- Shoe Grid -->
             <div class="catalogue-grid" id="catalogueGrid">
-                <div class="shoe-card animate-on-scroll">
+                
+                <!-- Men Slides Category -->
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
                     <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides.jpg')">
                         <span>Men Slides</span>
                     </div>
@@ -56,92 +71,8 @@
                     </div>
                 </div>
 
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/brogues.jpg')">
-                        <span>Brogues</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Brogues</h3>
-                        <div class="shoe-price">₦200,000</div>
-                        <p class="shoe-description">Classic brogues featuring decorative perforations and wingtip design. Perfect for formal occasions and business attire with traditional craftsmanship.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/shoe_sandals.jpg')">
-                        <span>Shoe Sandal</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Shoe Sandal</h3>
-                        <div class="shoe-price">₦100,000</div>
-                        <p class="shoe-description">Elegant open-toe sandals combining comfort with sophisticated styling. Ideal for warm weather and semi-formal occasions.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/suede_loafers.jpg')">
-                        <span>Suede Loafers</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Suede Loafers</h3>
-                        <div class="shoe-price">₦150,000</div>
-                        <p class="shoe-description">Luxurious suede loafers for smart-casual occasions.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/white_cup_soles.jpg')">
-                        <span>White Cup soles</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>White Cup soles</h3>
-                        <div class="shoe-price">₦150,000</div>
-                        <p class="shoe-description">Modern sneakers with white soles.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/leather_wallet.jpg')">
-                        <span>Leather wallet</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Leather wallet</h3>
-                        <div class="shoe-price">From ₦25,000</div>
-                        <p class="shoe-description">Handmade leather wallet.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/mules.jpg')">
-                        <span>Mules</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Mules</h3>
-                        <div class="shoe-price">₦85,000</div>
-                        <p class="shoe-description">Backless shoes for easy wear.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/birkenstock.jpg')">
-                        <span>Birkenstock</span>
-                    </div>
-                    <div class="shoe-card-content">
-                        <h3>Birkenstock</h3>
-                        <div class="shoe-price">₦50,000</div>
-                        <p class="shoe-description">Comfortable sandals with straps.</p>
-                        <button class="order-button" type="button">Order Now</button>
-                    </div>
-                </div>
-
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/trendy_slides.jpg')">
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides1.jpg')">
                         <span>Trendy Slides</span>
                     </div>
                     <div class="shoe-card-content">
@@ -152,7 +83,56 @@
                     </div>
                 </div>
 
-                 <div class="shoe-card animate-on-scroll">
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides2.jpg')">
+                        <span>Men slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Men slides</h3>
+                        <div class="shoe-price">₦50,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides3.jpg')">
+                        <span>Men slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Men slides</h3>
+                        <div class="shoe-price">₦50,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides4.jpg')">
+                        <span>Men slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Men slides</h3>
+                        <div class="shoe-price">₦50,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="men-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/men_slides5.jpg')">
+                        <span>Men slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Men slides</h3>
+                        <div class="shoe-price">₦50,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Women Slides Category -->
+                <div class="shoe-card animate-on-scroll" data-category="women-slides">
                     <div class="shoe-image" style="background-image: url('../assets/images/shoes/female_slides.jpg')">
                         <span>Female Slides</span>
                     </div>
@@ -164,19 +144,116 @@
                     </div>
                 </div>
 
-                <div class="shoe-card animate-on-scroll">
-                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/patina.jpg')">
-                        <span>Casual Shoes</span>
+                <div class="shoe-card animate-on-scroll" data-category="women-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/female_slides1.jpg')">
+                        <span>Female Slides</span>
                     </div>
                     <div class="shoe-card-content">
-                        <h3>Casual Shoes</h3>
+                        <h3>Female Slides</h3>
+                        <div class="shoe-price">₦40,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="women-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/female_slides3.jpg')">
+                        <span>Female Slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Female Slides</h3>
+                        <div class="shoe-price">₦40,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="women-slides">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/female_slides4.jpg')">
+                        <span>Female Slides</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Female Slides</h3>
+                        <div class="shoe-price">₦40,000</div>
+                        <p class="shoe-description">Stylish slides for casual wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Formal Shoes Category -->
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/brogues.jpg')">
+                        <span>Brogues</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Brogues</h3>
+                        <div class="shoe-price">₦200,000</div>
+                        <p class="shoe-description">Classic brogues featuring decorative perforations and wingtip design. Perfect for formal occasions and business attire with traditional craftsmanship.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/formal_shoes1.jpg')">
+                        <span>Formal Shoes</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Formal Shoes</h3>
                         <div class="shoe-price">₦200,000</div>
                         <p class="shoe-description">Hand-colored leather shoes.</p>
                         <button class="order-button" type="button">Order Now</button>
                     </div>
                 </div>
 
-                <div class="shoe-card animate-on-scroll">
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/formal_shoes.jpg')">
+                        <span>Formal Shoes</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Formal Shoes</h3>
+                        <div class="shoe-price">₦200,000</div>
+                        <p class="shoe-description">Hand-colored leather shoes.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/formal_shoes2.jpg')">
+                        <span>Suede</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Suede</h3>
+                        <div class="shoe-price">₦200,000</div>
+                        <p class="shoe-description">Luxurious suede loafers for smart-casual occasions.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/formal_shoes3.jpg')">
+                        <span>Formal Shoes</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Formal Shoes</h3>
+                        <div class="shoe-price">₦200,000</div>
+                        <p class="shoe-description">Hand-colored leather shoes.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/formal_shoes4.jpg')">
+                        <span>Formal Shoes</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Formal Shoes</h3>
+                        <div class="shoe-price">₦200,000</div>
+                        <p class="shoe-description">Hand-colored leather shoes.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
                     <div class="shoe-image" style="background-image: url('../assets/images/shoes/loafers.jpg')">
                         <span>Loafers</span>
                     </div>
@@ -187,7 +264,128 @@
                         <button class="order-button" type="button">Order Now</button>
                     </div>
                 </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="formal">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/suede_loafers.jpg')">
+                        <span>Suede Loafers</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Suede Loafers</h3>
+                        <div class="shoe-price">₦150,000</div>
+                        <p class="shoe-description">Luxurious suede loafers for smart-casual occasions.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Casual Shoes Category -->
+                <div class="shoe-card animate-on-scroll" data-category="casual">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/white_cup_soles.jpg')">
+                        <span>White Cup soles</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>White Cup soles</h3>
+                        <div class="shoe-price">₦150,000</div>
+                        <p class="shoe-description">Modern sneakers with white soles.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="casual">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/casual_shoes.jpg')">
+                        <span>Sneakers</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Comfort Sneakers</h3>
+                        <div class="shoe-price">₦45,000</div>
+                        <p class="shoe-description">Everyday comfort, perfect for campus and city strolls.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="casual">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/casual_shoes1.jpg')">
+                        <span>Loafers</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Casual Loafers</h3>
+                        <div class="shoe-price">₦60,000</div>
+                        <p class="shoe-description">Effortless style for relaxed outings and social events.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="casual">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/casual_shoes2.jpg')">
+                        <span>Slip-Ons</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Urban Slip-Ons</h3>
+                        <div class="shoe-price">₦38,000</div>
+                        <p class="shoe-description">Quick to wear, chic for any casual day.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Sandals Category -->
+                <div class="shoe-card animate-on-scroll" data-category="sandals">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/shoe_sandals.jpg')">
+                        <span>Shoe Sandal</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Shoe Sandal</h3>
+                        <div class="shoe-price">₦100,000</div>
+                        <p class="shoe-description">Elegant open-toe sandals combining comfort with sophisticated styling. Ideal for warm weather and semi-formal occasions.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="sandals">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/birkenstock.jpg')">
+                        <span>Birkenstock</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Birkenstock</h3>
+                        <div class="shoe-price">₦50,000</div>
+                        <p class="shoe-description">Comfortable sandals with straps.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="shoe-card animate-on-scroll" data-category="sandals">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/mules.jpg')">
+                        <span>Mules</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Mules</h3>
+                        <div class="shoe-price">₦85,000</div>
+                        <p class="shoe-description">Backless shoes for easy wear.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Accessories Category -->
+                <div class="shoe-card animate-on-scroll" data-category="accessories">
+                    <div class="shoe-image" style="background-image: url('../assets/images/shoes/leather_wallet.jpg')">
+                        <span>Leather wallet</span>
+                    </div>
+                    <div class="shoe-card-content">
+                        <h3>Leather wallet</h3>
+                        <div class="shoe-price">From ₦25,000</div>
+                        <p class="shoe-description">Handmade leather wallet.</p>
+                        <button class="order-button" type="button">Order Now</button>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Category Empty State -->
+            <div class="category-empty-state" id="categoryEmptyState" style="display: none;">
+                <div class="empty-state-content">
+                    <h3>No shoes found in this category</h3>
+                    <p>Try selecting a different category or using the search function.</p>
+                </div>
+            </div>
+
         </div>
     </main>
 

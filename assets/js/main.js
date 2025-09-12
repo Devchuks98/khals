@@ -1,5 +1,8 @@
-// Khal Bespoke Shoemaking Website JavaScript - Optimized
-document.addEventListener('DOMContentLoaded', initializeWebsite);
+// Khal Bespoke Shoemaking Website JavaScript - Complete with Category System
+document.addEventListener('DOMContentLoaded', function() {
+    initializeWebsite();
+    setTimeout(initializeCategoryFromURL, 100);
+});
 
 // Configuration
 const CONFIG = {
@@ -7,7 +10,7 @@ const CONFIG = {
         businessNumber: '2348147994796',
         messages: {
             default: 'Hello Khal Designs! I am interested in your bespoke shoes.',
-            order: 'Hello! I would like to order the {SHOE_NAME}. Could you please provide more details about customization options and pricing?',
+            order: 'Hello! I would like to order the {SHOE_NAME}. Could you please provide more details about customization?',
             apprenticeship: 'Hello Khal Designs! I am interested in your apprenticeship program. I would like to know more about the enrollment process and program details.'
         }
     },
@@ -23,6 +26,7 @@ function initializeWebsite() {
     initAnimations();
     initMobileOptimizations();
     setActiveNavItem();
+    initCategoryTabs();
     setTimeout(initWhatsAppIntegration, 1000);
 }
 
@@ -56,11 +60,14 @@ function setupEventListeners() {
         }, 16);
     });
 
-    // Search functionality
+    // Enhanced search functionality that works with categories
     const catalogueSearch = document.getElementById('catalogueSearch');
     if (catalogueSearch) {
         catalogueSearch.addEventListener('input', debounce(handleCatalogueSearch, 300));
     }
+
+    // Hash change listener for back/forward navigation
+    window.addEventListener('hashchange', initializeCategoryFromURL);
 
     // Orientation change handling
     window.addEventListener('orientationchange', () => {
@@ -73,6 +80,177 @@ function setupEventListeners() {
     // Online/offline status
     window.addEventListener('online', () => showNotification('Connection restored', 'success'));
     window.addEventListener('offline', () => showNotification('Connection lost. Some features may not work properly.', 'error'));
+}
+
+// Category Management
+function initCategoryTabs() {
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const catalogueGrid = document.getElementById('catalogueGrid');
+    
+    if (!categoryTabs.length || !catalogueGrid) return;
+    
+    // Set up event listeners for category tabs
+    categoryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const category = this.dataset.category;
+            switchCategory(category);
+            updateActiveTab(this);
+        });
+    });
+    
+    // Initialize with 'all' category
+    switchCategory('all');
+}
+
+function switchCategory(category) {
+    const shoeCards = document.querySelectorAll('.shoe-card');
+    const catalogueGrid = document.getElementById('catalogueGrid');
+    const emptyState = document.getElementById('categoryEmptyState');
+    
+    // Add loading state
+    catalogueGrid.classList.add('loading');
+    
+    setTimeout(() => {
+        let visibleCount = 0;
+        
+        shoeCards.forEach(card => {
+            const cardCategory = card.dataset.category;
+            const shouldShow = category === 'all' || cardCategory === category;
+            
+            if (shouldShow) {
+                card.classList.remove('hidden');
+                card.classList.add('visible');
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+                card.classList.remove('visible');
+                card.style.display = 'none';
+            }
+        });
+        
+        // Handle empty state
+        if (visibleCount === 0 && category !== 'all') {
+            emptyState.style.display = 'block';
+            catalogueGrid.style.display = 'none';
+        } else {
+            emptyState.style.display = 'none';
+            catalogueGrid.style.display = 'grid';
+        }
+        
+        // Remove loading state
+        catalogueGrid.classList.remove('loading');
+        
+        // Update URL hash for bookmarking
+        if (category !== 'all') {
+            history.replaceState(null, null, `#${category}`);
+        } else {
+            history.replaceState(null, null, window.location.pathname);
+        }
+        
+        // Trigger scroll animation for visible cards
+        setTimeout(() => {
+            animateOnScroll();
+        }, 100);
+        
+    }, 300);
+}
+
+function updateActiveTab(activeTab) {
+    // Remove active class from all tabs
+    document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Add active class to clicked tab
+    activeTab.classList.add('active');
+}
+
+// Enhanced search functionality that works with categories
+function handleCatalogueSearch(event) {
+    const searchTerm = event.target.value.toLowerCase().trim();
+    const shoeCards = document.querySelectorAll('.shoe-card');
+    const emptyState = document.getElementById('categoryEmptyState');
+    const catalogueGrid = document.getElementById('catalogueGrid');
+    const activeCategory = document.querySelector('.category-tab.active')?.dataset.category || 'all';
+    
+    let visibleCount = 0;
+    
+    shoeCards.forEach(card => {
+        const shoeName = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const shoeDescription = card.querySelector('.shoe-description')?.textContent.toLowerCase() || '';
+        const cardCategory = card.dataset.category;
+        
+        // Check both category and search term
+        const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+        const matchesSearch = searchTerm === '' || shoeName.includes(searchTerm) || shoeDescription.includes(searchTerm);
+        
+        const shouldShow = matchesCategory && matchesSearch;
+        
+        if (shouldShow) {
+            card.style.display = 'block';
+            card.classList.remove('hidden');
+            card.classList.add('visible');
+            card.style.animation = 'fadeIn 0.5s ease';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+            card.classList.add('hidden');
+            card.classList.remove('visible');
+        }
+    });
+    
+    // Handle no results
+    updateEmptyState(visibleCount, searchTerm, activeCategory);
+}
+
+function updateEmptyState(visibleCount, searchTerm, activeCategory) {
+    const emptyState = document.getElementById('categoryEmptyState');
+    const emptyStateContent = emptyState.querySelector('.empty-state-content');
+    
+    if (visibleCount === 0) {
+        let message = '';
+        if (searchTerm && activeCategory !== 'all') {
+            message = `<h3>No results found</h3><p>No shoes found matching "${searchTerm}" in the selected category. Try different keywords or select another category.</p>`;
+        } else if (searchTerm) {
+            message = `<h3>No results found</h3><p>No shoes found matching "${searchTerm}". Try different keywords.</p>`;
+        } else {
+            message = '<h3>No shoes found</h3><p>No shoes available in this category at the moment.</p>';
+        }
+        
+        emptyStateContent.innerHTML = message;
+        emptyState.style.display = 'block';
+    } else {
+        emptyState.style.display = 'none';
+    }
+}
+
+// Initialize category from URL hash on page load
+function initializeCategoryFromURL() {
+    const hash = window.location.hash.substring(1);
+    const validCategories = ['all', 'men-slides', 'women-slides', 'formal', 'casual', 'sandals', 'accessories'];
+    
+    if (hash && validCategories.includes(hash)) {
+        const targetTab = document.querySelector(`[data-category="${hash}"]`);
+        if (targetTab) {
+            updateActiveTab(targetTab);
+            switchCategory(hash);
+        }
+    }
+}
+
+// Helper function to format category names
+function formatCategoryName(category) {
+    const categoryNames = {
+        'men-slides': 'Men Slides',
+        'women-slides': 'Women Slides',
+        'formal': 'Formal Shoes',
+        'casual': 'Casual Shoes',
+        'sandals': 'Sandals',
+        'accessories': 'Accessories',
+        'all': 'All Categories'
+    };
+    return categoryNames[category] || category;
 }
 
 // WhatsApp Integration
@@ -117,9 +295,11 @@ function updateOrderButtons() {
             const shoeCard = this.closest('.shoe-card');
             const shoeName = shoeCard?.querySelector('h3')?.textContent || 'Selected Shoe';
             const shoePrice = shoeCard?.querySelector('.shoe-price')?.textContent || '';
+            const shoeCategory = shoeCard?.dataset.category || '';
             
             const message = CONFIG.whatsapp.messages.order.replace('{SHOE_NAME}', shoeName);
-            const fullMessage = shoePrice ? `${message} (Price: ${shoePrice})` : message;
+            const categoryText = shoeCategory ? ` (Category: ${formatCategoryName(shoeCategory)})` : '';
+            const fullMessage = shoePrice ? `${message} (Price: ${shoePrice})${categoryText}` : message + categoryText;
             
             // Loading state
             const originalText = this.textContent;
@@ -130,7 +310,7 @@ function updateOrderButtons() {
                 window.open(generateWhatsAppURL(fullMessage), '_blank');
                 this.textContent = originalText;
                 this.disabled = false;
-                trackWhatsAppClick('order_button', shoeName);
+                trackWhatsAppClick('order_button', shoeName, shoeCategory);
             }, 500);
         });
     });
@@ -244,40 +424,6 @@ function toggleMobileMenu() {
         mobileMenu.classList.toggle('active');
         
         document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
-}
-
-// Search functionality
-function handleCatalogueSearch(event) {
-    const searchTerm = event.target.value.toLowerCase().trim();
-    const shoeCards = document.querySelectorAll('.shoe-card');
-    let visibleCount = 0;
-    
-    shoeCards.forEach(card => {
-        const shoeName = card.querySelector('h3')?.textContent.toLowerCase() || '';
-        const shoeDescription = card.querySelector('.shoe-description')?.textContent.toLowerCase() || '';
-        
-        const isVisible = searchTerm === '' || shoeName.includes(searchTerm) || shoeDescription.includes(searchTerm);
-        
-        card.style.display = isVisible ? 'block' : 'none';
-        if (isVisible) {
-            card.style.animation = 'fadeIn 0.5s ease';
-            visibleCount++;
-        }
-    });
-    
-    // Handle no results message
-    const existingMessage = document.querySelector('.no-results-message');
-    const catalogueGrid = document.querySelector('.catalogue-grid');
-    
-    if (visibleCount === 0 && searchTerm !== '' && !existingMessage && catalogueGrid) {
-        const message = document.createElement('div');
-        message.className = 'no-results-message';
-        message.innerHTML = '<p>No shoes found matching your search. Try different keywords.</p>';
-        message.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-light);';
-        catalogueGrid.parentNode.insertBefore(message, catalogueGrid.nextSibling);
-    } else if (existingMessage && (visibleCount > 0 || searchTerm === '')) {
-        existingMessage.remove();
     }
 }
 
