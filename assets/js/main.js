@@ -1,17 +1,20 @@
-// Khal Bespoke Shoemaking Website JavaScript - Complete with Category System
-document.addEventListener('DOMContentLoaded', function() {
+// Khal Bespoke Shoemaking Website JavaScript - Enhanced with WhatsApp Catalog Integration
+document.addEventListener('DOMContentLoaded', function () {
     initializeWebsite();
     setTimeout(initializeCategoryFromURL, 100);
 });
 
-// Configuration
+// Enhanced Configuration with Catalog Integration
 const CONFIG = {
     whatsapp: {
         businessNumber: '2348147994796',
+        catalogURL: 'https://wa.me/c/2348147994796',
         messages: {
             default: 'Hello Khal Designs! I am interested in your bespoke shoes.',
             order: 'Hello! I would like to order the {SHOE_NAME}. Could you please provide more details about customization?',
-            apprenticeship: 'Hello Khal Designs! I am interested in your apprenticeship program. I would like to know more about the enrollment process and program details.'
+            apprenticeship: 'Hello Khal Designs! I am interested in your apprenticeship program. I would like to know more about the enrollment process and program details.',
+            catalog: 'Hello Khal Designs! I want to explore your full catalog. I couldn\'t find what I was looking for on the website.',
+            searchHelp: 'Hello! I was searching for "{SEARCH_TERM}" on your website but couldn\'t find it. Do you have similar products in your catalog?'
         }
     },
     email: {
@@ -20,13 +23,14 @@ const CONFIG = {
     }
 };
 
-// Main initialization
+// Main initialization with catalog integration
 function initializeWebsite() {
     setupEventListeners();
     initAnimations();
     initMobileOptimizations();
     setActiveNavItem();
     initCategoryTabs();
+    initCatalogIntegration();
     setTimeout(initWhatsAppIntegration, 1000);
 }
 
@@ -43,7 +47,7 @@ function setupEventListeners() {
         const nav = document.querySelector('nav');
         const navLinks = document.getElementById('navLinks');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
         if (nav && !nav.contains(event.target) && navLinks?.classList.contains('active')) {
             navLinks.classList.remove('active');
             mobileMenu?.classList.remove('active');
@@ -60,7 +64,7 @@ function setupEventListeners() {
         }, 16);
     });
 
-    // Enhanced search functionality that works with categories
+    // Enhanced search functionality that works with categories and catalog
     const catalogueSearch = document.getElementById('catalogueSearch');
     if (catalogueSearch) {
         catalogueSearch.addEventListener('input', debounce(handleCatalogueSearch, 300));
@@ -86,18 +90,18 @@ function setupEventListeners() {
 function initCategoryTabs() {
     const categoryTabs = document.querySelectorAll('.category-tab');
     const catalogueGrid = document.getElementById('catalogueGrid');
-    
+
     if (!categoryTabs.length || !catalogueGrid) return;
-    
+
     // Set up event listeners for category tabs
     categoryTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             const category = this.dataset.category;
             switchCategory(category);
             updateActiveTab(this);
         });
     });
-    
+
     // Initialize with 'all' category
     switchCategory('all');
 }
@@ -106,17 +110,17 @@ function switchCategory(category) {
     const shoeCards = document.querySelectorAll('.shoe-card');
     const catalogueGrid = document.getElementById('catalogueGrid');
     const emptyState = document.getElementById('categoryEmptyState');
-    
+
     // Add loading state
     catalogueGrid.classList.add('loading');
-    
+
     setTimeout(() => {
         let visibleCount = 0;
-        
+
         shoeCards.forEach(card => {
             const cardCategory = card.dataset.category;
             const shouldShow = category === 'all' || cardCategory === category;
-            
+
             if (shouldShow) {
                 card.classList.remove('hidden');
                 card.classList.add('visible');
@@ -128,32 +132,43 @@ function switchCategory(category) {
                 card.style.display = 'none';
             }
         });
-        
-        // Handle empty state
-        if (visibleCount === 0 && category !== 'all') {
-            emptyState.style.display = 'block';
-            catalogueGrid.style.display = 'none';
-        } else {
-            emptyState.style.display = 'none';
-            catalogueGrid.style.display = 'grid';
-        }
-        
+
+        // Handle empty state with catalog integration
+        handleCategoryEmptyState(visibleCount, category);
+
         // Remove loading state
         catalogueGrid.classList.remove('loading');
-        
+
         // Update URL hash for bookmarking
         if (category !== 'all') {
             history.replaceState(null, null, `#${category}`);
         } else {
             history.replaceState(null, null, window.location.pathname);
         }
-        
+
         // Trigger scroll animation for visible cards
         setTimeout(() => {
             animateOnScroll();
         }, 100);
-        
+
     }, 300);
+}
+
+function handleCategoryEmptyState(visibleCount, category) {
+    const emptyState = document.getElementById('categoryEmptyState');
+    const catalogueGrid = document.getElementById('catalogueGrid');
+
+    if (visibleCount === 0 && category !== 'all') {
+        const enhancedEmptyState = createEnhancedEmptyState('', category);
+        if (emptyState) {
+            emptyState.innerHTML = enhancedEmptyState;
+            emptyState.style.display = 'block';
+        }
+        catalogueGrid.style.display = 'none';
+    } else {
+        if (emptyState) emptyState.style.display = 'none';
+        catalogueGrid.style.display = 'grid';
+    }
 }
 
 function updateActiveTab(activeTab) {
@@ -161,32 +176,38 @@ function updateActiveTab(activeTab) {
     document.querySelectorAll('.category-tab').forEach(tab => {
         tab.classList.remove('active');
     });
-    
+
     // Add active class to clicked tab
     activeTab.classList.add('active');
 }
 
-// Enhanced search functionality that works with categories
+// Enhanced search functionality that works with categories and catalog
 function handleCatalogueSearch(event) {
     const searchTerm = event.target.value.toLowerCase().trim();
     const shoeCards = document.querySelectorAll('.shoe-card');
     const emptyState = document.getElementById('categoryEmptyState');
     const catalogueGrid = document.getElementById('catalogueGrid');
     const activeCategory = document.querySelector('.category-tab.active')?.dataset.category || 'all';
-    
+
     let visibleCount = 0;
-    
+    let hasExactMatch = false;
+
     shoeCards.forEach(card => {
         const shoeName = card.querySelector('h3')?.textContent.toLowerCase() || '';
         const shoeDescription = card.querySelector('.shoe-description')?.textContent.toLowerCase() || '';
         const cardCategory = card.dataset.category;
-        
+
         // Check both category and search term
         const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
         const matchesSearch = searchTerm === '' || shoeName.includes(searchTerm) || shoeDescription.includes(searchTerm);
-        
+
+        // Check for exact matches
+        if (shoeName === searchTerm || shoeDescription.includes(searchTerm)) {
+            hasExactMatch = true;
+        }
+
         const shouldShow = matchesCategory && matchesSearch;
-        
+
         if (shouldShow) {
             card.style.display = 'block';
             card.classList.remove('hidden');
@@ -199,37 +220,81 @@ function handleCatalogueSearch(event) {
             card.classList.remove('visible');
         }
     });
-    
-    // Handle no results
-    updateEmptyState(visibleCount, searchTerm, activeCategory);
+
+    // Enhanced empty state handling with catalog integration
+    handleEnhancedEmptyState(visibleCount, searchTerm, activeCategory, hasExactMatch);
+
+    // Show search suggestions if no results
+    if (visibleCount === 0 && searchTerm) {
+        showSearchSuggestions(searchTerm);
+    } else {
+        hideSearchSuggestions();
+    }
 }
 
-function updateEmptyState(visibleCount, searchTerm, activeCategory) {
+function handleEnhancedEmptyState(visibleCount, searchTerm, activeCategory, hasExactMatch) {
     const emptyState = document.getElementById('categoryEmptyState');
-    const emptyStateContent = emptyState.querySelector('.empty-state-content');
-    
+    const catalogueGrid = document.getElementById('catalogueGrid');
+
     if (visibleCount === 0) {
-        let message = '';
-        if (searchTerm && activeCategory !== 'all') {
-            message = `<h3>No results found</h3><p>No shoes found matching "${searchTerm}" in the selected category. Try different keywords or select another category.</p>`;
-        } else if (searchTerm) {
-            message = `<h3>No results found</h3><p>No shoes found matching "${searchTerm}". Try different keywords.</p>`;
-        } else {
-            message = '<h3>No shoes found</h3><p>No shoes available in this category at the moment.</p>';
+        // Replace empty state with enhanced version
+        const enhancedEmptyState = createEnhancedEmptyState(searchTerm, activeCategory);
+
+        if (emptyState) {
+            emptyState.innerHTML = enhancedEmptyState;
+            emptyState.style.display = 'block';
         }
-        
-        emptyStateContent.innerHTML = message;
-        emptyState.style.display = 'block';
+
+        catalogueGrid.style.display = 'none';
     } else {
-        emptyState.style.display = 'none';
+        if (emptyState) emptyState.style.display = 'none';
+        catalogueGrid.style.display = 'grid';
     }
+}
+
+function createEnhancedEmptyState(searchTerm, activeCategory) {
+    const categoryName = formatCategoryName(activeCategory);
+
+    let title, description, searchMessage;
+
+    if (searchTerm && activeCategory !== 'all') {
+        title = 'No matches found';
+        description = `We couldn't find "${searchTerm}" in ${categoryName} on our website classics.`;
+        searchMessage = CONFIG.whatsapp.messages.searchHelp.replace('{SEARCH_TERM}', searchTerm);
+    } else if (searchTerm) {
+        title = 'Product not found';
+        description = `"${searchTerm}" isn't in our website classics, but we might have it in our full catalog.`;
+        searchMessage = CONFIG.whatsapp.messages.searchHelp.replace('{SEARCH_TERM}', searchTerm);
+    } else {
+        title = 'No products in this category';
+        description = `No ${categoryName.toLowerCase()} available in our website classics right now.`;
+        searchMessage = CONFIG.whatsapp.messages.catalog;
+    }
+
+    return `
+        <div class="enhanced-empty-state">
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <p><strong>Good news!</strong> Our WhatsApp catalog has 100+ exclusive designs including custom options.</p>
+            <div class="catalog-cta-buttons">
+                <a href="${CONFIG.whatsapp.catalogURL}" target="_blank" class="whatsapp-catalog-btn" onclick="trackCatalogClick('empty_state_search', '${searchTerm}')">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
+                    </svg>
+                    Browse Full Catalog
+                </a>
+                ${searchTerm ? '<button class="search-reset-btn" onclick="clearSearch()">Clear Search</button>' : ''}
+            </div>
+            ${searchTerm ? `<p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Or <a href="${generateWhatsAppURL(searchMessage)}" target="_blank" style="color: #25D366; font-weight: 600;" onclick="trackCatalogClick('direct_search_help', '${searchTerm}')">ask us directly about "${searchTerm}"</a></p>` : ''}
+        </div>
+    `;
 }
 
 // Initialize category from URL hash on page load
 function initializeCategoryFromURL() {
     const hash = window.location.hash.substring(1);
     const validCategories = ['all', 'men-slides', 'women-slides', 'formal', 'casual', 'sandals', 'accessories'];
-    
+
     if (hash && validCategories.includes(hash)) {
         const targetTab = document.querySelector(`[data-category="${hash}"]`);
         if (targetTab) {
@@ -253,6 +318,191 @@ function formatCategoryName(category) {
     return categoryNames[category] || category;
 }
 
+// WhatsApp Catalog Integration
+function initCatalogIntegration() {
+    createCatalogPromoBanner();
+    enhanceSearchFunctionality();
+    setupSearchSuggestions();
+    trackCatalogInteractions();
+}
+
+function createCatalogPromoBanner() {
+    // Add promo banner after category tabs
+    const categoryTabs = document.querySelector('.category-tabs');
+    if (categoryTabs && !document.querySelector('.catalog-promo-banner')) {
+        const promoBanner = document.createElement('div');
+        promoBanner.className = 'catalog-promo-banner animate-on-scroll';
+        promoBanner.innerHTML = `
+            <div class="catalog-promo-content">
+                <h3>Can't find what you're looking for?</h3>
+                <p>Browse our complete collection with 100+ exclusive designs in our WhatsApp catalog</p>
+                <a href="${CONFIG.whatsapp.catalogURL}" target="_blank" class="whatsapp-catalog-btn" id="headerCatalogBtn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
+                    </svg>
+                    Browse Full Catalog
+                </a>
+            </div>
+        `;
+
+        categoryTabs.insertAdjacentElement('afterend', promoBanner);
+
+        // Add click tracking
+        document.getElementById('headerCatalogBtn').addEventListener('click', () => {
+            trackWhatsAppClick('catalog_promo_banner');
+        });
+    }
+}
+
+function enhanceSearchFunctionality() {
+    const catalogueSearch = document.getElementById('catalogueSearch');
+    if (!catalogueSearch) return;
+
+    let searchTimeout;
+    let lastSearchTerm = '';
+
+    // Add search suggestions container
+    const searchContainer = catalogueSearch.parentElement;
+    const suggestionsDiv = document.createElement('div');
+    suggestionsDiv.className = 'search-suggestions';
+    suggestionsDiv.id = 'searchSuggestions';
+    searchContainer.appendChild(suggestionsDiv);
+}
+
+function setupSearchSuggestions() {
+    // Popular search terms and categories
+    const suggestions = {
+        popular: ['brogues', 'loafers', 'sneakers', 'boots', 'oxford'],
+        materials: ['leather', 'suede', 'canvas', 'patent'],
+        occasions: ['formal', 'casual', 'wedding', 'business'],
+        styles: ['classic', 'modern', 'vintage', 'contemporary']
+    };
+
+    window.searchSuggestions = suggestions;
+}
+
+function showSearchSuggestions(searchTerm) {
+    const suggestionsDiv = document.getElementById('searchSuggestions');
+    if (!suggestionsDiv) return;
+
+    const allSuggestions = Object.values(window.searchSuggestions || {}).flat();
+    const relevantSuggestions = allSuggestions.filter(term =>
+        term.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        term.toLowerCase() !== searchTerm.toLowerCase()
+    ).slice(0, 6);
+
+    if (relevantSuggestions.length > 0) {
+        suggestionsDiv.innerHTML = `
+            <h4>Did you mean:</h4>
+            <div class="suggestion-tags">
+                ${relevantSuggestions.map(term =>
+            `<span class="suggestion-tag" onclick="applySuggestion('${term}')">${term}</span>`
+        ).join('')}
+            </div>
+        `;
+        suggestionsDiv.classList.add('active');
+    } else {
+        hideSearchSuggestions();
+    }
+}
+
+function hideSearchSuggestions() {
+    const suggestionsDiv = document.getElementById('searchSuggestions');
+    if (suggestionsDiv) {
+        suggestionsDiv.classList.remove('active');
+    }
+}
+
+function trackCatalogInteractions() {
+    // Track when users spend time searching without finding results
+    let searchAttempts = 0;
+    let noResultsCount = 0;
+
+    const searchInput = document.getElementById('catalogueSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            searchAttempts++;
+
+            setTimeout(() => {
+                const visibleCards = document.querySelectorAll('.shoe-card.visible').length;
+                if (visibleCards === 0 && this.value.trim()) {
+                    noResultsCount++;
+
+                    // Show extra help after 2 unsuccessful searches
+                    if (noResultsCount >= 2) {
+                        showPersistentCatalogHelper();
+                    }
+                }
+            }, 600);
+        });
+    }
+}
+
+function showPersistentCatalogHelper() {
+    // Create a subtle helper that sticks after multiple failed searches
+    if (document.querySelector('.persistent-catalog-helper')) return;
+
+    const helper = document.createElement('div');
+    helper.className = 'persistent-catalog-helper';
+    helper.style.cssText = `
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        background: #25D366;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        z-index: 999;
+        cursor: pointer;
+        animation: slideInRight 0.5s ease;
+        max-width: 250px;
+        line-height: 1.3;
+    `;
+
+    helper.innerHTML = `
+        Try our full catalog?<br>
+        <small>100+ exclusive designs</small>
+    `;
+
+    helper.addEventListener('click', function () {
+        window.open(CONFIG.whatsapp.catalogURL, '_blank');
+        trackWhatsAppClick('persistent_helper');
+        this.remove();
+    });
+
+    document.body.appendChild(helper);
+
+    // Auto-remove after 10 seconds
+    setTimeout(() => {
+        if (helper.parentElement) helper.remove();
+    }, 10000);
+}
+
+// Global functions (attach to window for onclick handlers)
+window.applySuggestion = function (term) {
+    const searchInput = document.getElementById('catalogueSearch');
+    if (searchInput) {
+        searchInput.value = term;
+        searchInput.dispatchEvent(new Event('input'));
+        hideSearchSuggestions();
+    }
+};
+
+window.clearSearch = function () {
+    const searchInput = document.getElementById('catalogueSearch');
+    if (searchInput) {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+        hideSearchSuggestions();
+    }
+};
+
+window.trackCatalogClick = function (source, searchTerm = '') {
+    trackWhatsAppClick(`catalog_${source}`, searchTerm);
+};
+
 // WhatsApp Integration
 function initWhatsAppIntegration() {
     createFloatingWhatsAppButton();
@@ -263,49 +513,49 @@ function initWhatsAppIntegration() {
 
 function createFloatingWhatsAppButton() {
     if (document.querySelector('.whatsapp-float')) return;
-    
+
     const whatsappButton = document.createElement('a');
     whatsappButton.className = 'whatsapp-float';
     whatsappButton.href = generateWhatsAppURL(getContextualMessage());
     whatsappButton.target = '_blank';
     whatsappButton.rel = 'noopener noreferrer';
     whatsappButton.setAttribute('aria-label', 'Chat with us on WhatsApp');
-    
+
     whatsappButton.innerHTML = `
         <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
         </svg>
     `;
-    
+
     document.body.appendChild(whatsappButton);
-    
+
     whatsappButton.addEventListener('click', () => trackWhatsAppClick('floating_button'));
 }
 
 function updateOrderButtons() {
     const orderButtons = document.querySelectorAll('.order-button');
-    
+
     orderButtons.forEach(button => {
         const newButton = button.cloneNode(true);
         button.parentNode.replaceChild(newButton, button);
-        
-        newButton.addEventListener('click', function(e) {
+
+        newButton.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const shoeCard = this.closest('.shoe-card');
             const shoeName = shoeCard?.querySelector('h3')?.textContent || 'Selected Shoe';
             const shoePrice = shoeCard?.querySelector('.shoe-price')?.textContent || '';
             const shoeCategory = shoeCard?.dataset.category || '';
-            
+
             const message = CONFIG.whatsapp.messages.order.replace('{SHOE_NAME}', shoeName);
             const categoryText = shoeCategory ? ` (Category: ${formatCategoryName(shoeCategory)})` : '';
             const fullMessage = shoePrice ? `${message} (Price: ${shoePrice})${categoryText}` : message + categoryText;
-            
+
             // Loading state
             const originalText = this.textContent;
             this.textContent = 'Redirecting...';
             this.disabled = true;
-            
+
             setTimeout(() => {
                 window.open(generateWhatsAppURL(fullMessage), '_blank');
                 this.textContent = originalText;
@@ -348,9 +598,9 @@ Thank you for your time.
 Best regards,
 [Your Name]
 [Your Phone Number]`);
-            
+
             const mailtoLink = `mailto:${CONFIG.email.address}?subject=${subject}&body=${body}`;
-            
+
             // Try to open email client, fallback to showing contact info
             try {
                 window.location.href = mailtoLink;
@@ -364,7 +614,7 @@ Best regards,
 
 function updateSocialMediaLinks() {
     const socialLinksContainers = document.querySelectorAll('.social-links');
-    
+
     socialLinksContainers.forEach(container => {
         container.innerHTML = `
             <a href="https://www.facebook.com/share/1Bh5D29qJY/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Follow us on Facebook">
@@ -400,7 +650,7 @@ function generateWhatsAppURL(message) {
 function getContextualMessage() {
     const currentPage = getCurrentPage();
     const messages = CONFIG.whatsapp.messages;
-    
+
     switch (currentPage) {
         case 'catalogue': return 'Hello Khal Designs! I am browsing your catalogue and interested in your bespoke shoes.';
         case 'apprenticeship': return messages.apprenticeship;
@@ -418,11 +668,11 @@ function getCurrentPage() {
 function toggleMobileMenu() {
     const navLinks = document.getElementById('navLinks');
     const mobileMenu = document.querySelector('.mobile-menu');
-    
+
     if (navLinks && mobileMenu) {
         navLinks.classList.toggle('active');
         mobileMenu.classList.toggle('active');
-        
+
         document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     }
 }
@@ -431,7 +681,7 @@ function toggleMobileMenu() {
 function handleHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
-    
+
     if (window.scrollY > 100) {
         Object.assign(header.style, {
             background: 'rgba(74, 44, 10, 0.95)',
@@ -450,7 +700,7 @@ function handleHeaderScroll() {
 // Animation functions
 function initAnimations() {
     animateOnScroll();
-    
+
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -461,7 +711,7 @@ function initAnimations() {
                 }
             });
         }, { rootMargin: '50px' });
-        
+
         setTimeout(() => {
             document.querySelectorAll('.shoe-image, .preview-image').forEach(img => {
                 img.style.opacity = '0';
@@ -470,7 +720,7 @@ function initAnimations() {
             });
         }, 500);
     }
-    
+
     if (isHomePage() && window.innerWidth > 768) {
         initTypewriterEffect();
     }
@@ -480,7 +730,7 @@ function animateOnScroll() {
     const elements = document.querySelectorAll('.animate-on-scroll:not(.animated)');
     const windowHeight = window.innerHeight;
     const animationOffset = 150;
-    
+
     elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         if (elementTop < windowHeight - animationOffset) {
@@ -493,11 +743,11 @@ function initTypewriterEffect() {
     setTimeout(() => {
         const heroText = document.querySelector('.hero p');
         if (!heroText) return;
-        
+
         const originalText = heroText.textContent;
         heroText.textContent = '';
         heroText.style.opacity = '1';
-        
+
         let i = 0;
         const typeWriter = () => {
             if (i < originalText.length) {
@@ -506,7 +756,7 @@ function initTypewriterEffect() {
                 setTimeout(typeWriter, 50);
             }
         };
-        
+
         typeWriter();
     }, 1500);
 }
@@ -514,14 +764,14 @@ function initTypewriterEffect() {
 // Mobile optimizations
 function initMobileOptimizations() {
     const inputs = document.querySelectorAll('input, textarea, select');
-    
+
     inputs.forEach(input => {
         input.addEventListener('focus', handleMobileInputFocus);
         input.addEventListener('blur', handleMobileInputBlur);
     });
 
     const interactiveElements = document.querySelectorAll('button, .cta-button, .nav-links a, .order-button');
-    
+
     interactiveElements.forEach(element => {
         element.addEventListener('touchstart', handleTouchStart, { passive: true });
         element.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -557,16 +807,16 @@ function handleTouchEnd() {
 function setActiveNavItem() {
     const currentPage = getCurrentPage();
     const navLinks = document.querySelectorAll('.nav-links a');
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
-        
+
         const shouldBeActive = (currentPage === 'index' || currentPage === '') && href === 'index.html' ||
-                              href === `pages/${currentPage}.html` || href === `${currentPage}.html` ||
-                              href === `../${currentPage === 'index' ? 'index.html' : `pages/${currentPage}.html`}` ||
-                              href === `../index.html` && (currentPage === 'index' || currentPage === '');
-        
+            href === `pages/${currentPage}.html` || href === `${currentPage}.html` ||
+            href === `../${currentPage === 'index' ? 'index.html' : `pages/${currentPage}.html`}` ||
+            href === `../index.html` && (currentPage === 'index' || currentPage === '');
+
         if (shouldBeActive) {
             link.classList.add('active');
         }
@@ -595,7 +845,7 @@ function debounce(func, wait) {
 function showNotification(message, type = 'info') {
     // Remove existing notifications
     document.querySelectorAll('.notification').forEach(notification => notification.remove());
-    
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -604,7 +854,7 @@ function showNotification(message, type = 'info') {
             <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
         </div>
     `;
-    
+
     // Add notification styles if they don't exist
     if (!document.querySelector('#notification-styles')) {
         const styles = document.createElement('style');
@@ -684,9 +934,9 @@ function showNotification(message, type = 'info') {
         `;
         document.head.appendChild(styles);
     }
-    
+
     document.body.appendChild(notification);
-    
+
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (notification.parentElement) {
@@ -716,13 +966,13 @@ function trackEmailClick(source) {
 }
 
 // Performance optimization - Preload critical images
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const criticalImages = [
         './assets/images/shoes/khal.jpg',
         './assets/images/shoes/khal1.jpg',
         './assets/images/shoes/khal5.jpg'
     ];
-    
+
     criticalImages.forEach(src => {
         const img = new Image();
         img.src = src;
@@ -730,12 +980,12 @@ window.addEventListener('load', function() {
 });
 
 // Error handling
-window.addEventListener('error', function(event) {
+window.addEventListener('error', function (event) {
     console.error('JavaScript error:', event.error);
 });
 
 // Expose utility functions globally for backward compatibility
-window.orderShoe = function(shoeName) {
+window.orderShoe = function (shoeName) {
     const message = CONFIG.whatsapp.messages.order.replace('{SHOE_NAME}', shoeName);
     window.open(generateWhatsAppURL(message), '_blank');
     trackWhatsAppClick('order_function', shoeName);
