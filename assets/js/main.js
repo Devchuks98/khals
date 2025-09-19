@@ -25,13 +25,54 @@ const CONFIG = {
 
 // Main initialization with catalog integration
 function initializeWebsite() {
+    // Core setup
     setupEventListeners();
-    initAnimations();
-    initMobileOptimizations();
     setActiveNavItem();
-    initCategoryTabs();
-    initCatalogIntegration();
-    setTimeout(initWhatsAppIntegration, 1000);
+
+    // Feature initialization with optimized timing
+    setTimeout(() => {
+        initAnimations();
+        initCategoryTabs();
+        initCatalogIntegration();
+    }, 100);
+
+    // Mobile and UX optimizations
+    setTimeout(() => {
+        initMobileOptimizations();
+        initUXEnhancements();
+    }, 200);
+
+    // WhatsApp integration (delayed for better performance)
+    setTimeout(() => {
+        initWhatsAppIntegration();
+    }, 500);
+
+    // Category initialization from URL
+    setTimeout(() => {
+        initializeCategoryFromURL();
+    }, 300);
+
+    console.log('✅ Khal Designs website initialized successfully');
+}
+
+// Performance monitoring
+function trackPerformance() {
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`🚀 Page load time: ${loadTime}ms`);
+
+                // Track to analytics if available
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'page_load_time', {
+                        'value': loadTime,
+                        'custom_parameter': 'site_performance'
+                    });
+                }
+            }, 100);
+        });
+    }
 }
 
 // Event listeners
@@ -532,6 +573,7 @@ function createFloatingWhatsAppButton() {
     whatsappButton.addEventListener('click', () => trackWhatsAppClick('floating_button'));
 }
 
+// Enhanced Order Button Logic - Replace existing updateOrderButtons function
 function updateOrderButtons() {
     const orderButtons = document.querySelectorAll('.order-button');
 
@@ -547,24 +589,181 @@ function updateOrderButtons() {
             const shoePrice = shoeCard?.querySelector('.shoe-price')?.textContent || '';
             const shoeCategory = shoeCard?.dataset.category || '';
 
-            const message = CONFIG.whatsapp.messages.order.replace('{SHOE_NAME}', shoeName);
-            const categoryText = shoeCategory ? ` (Category: ${formatCategoryName(shoeCategory)})` : '';
-            const fullMessage = shoePrice ? `${message} (Price: ${shoePrice})${categoryText}` : message + categoryText;
-
-            // Loading state
-            const originalText = this.textContent;
-            this.textContent = 'Redirecting...';
-            this.disabled = true;
-
-            setTimeout(() => {
-                window.open(generateWhatsAppURL(fullMessage), '_blank');
-                this.textContent = originalText;
-                this.disabled = false;
-                trackWhatsAppClick('order_button', shoeName, shoeCategory);
-            }, 500);
+            // Show order options modal
+            showOrderOptionsModal(shoeName, shoePrice, shoeCategory);
         });
     });
 }
+
+// New function to show order options modal
+function showOrderOptionsModal(shoeName, shoePrice, shoeCategory) {
+    // Remove existing modal if any
+    const existingModal = document.querySelector('.order-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Order ${shoeName}</h3>
+                ${shoePrice ? `<p class="modal-price">${shoePrice}</p>` : ''}
+                ${shoeCategory ? `<span class="modal-category">${formatCategoryName(shoeCategory)}</span>` : ''}
+            </div>
+            <div class="modal-body">
+                <p>Choose your preferred contact method:</p>
+                <div class="order-options">
+                    <button class="order-option whatsapp-option" onclick="orderViaWhatsApp('${shoeName}', '${shoePrice}', '${shoeCategory}')">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="option-icon">
+                            <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
+                        </svg>
+                        <div class="option-text">
+                            <strong>WhatsApp</strong>
+                            <small>Instant messaging & quick response</small>
+                        </div>
+                    </button>
+                    
+                    <button class="order-option email-option" onclick="orderViaEmail('${shoeName}', '${shoePrice}', '${shoeCategory}')">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="option-icon">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <div class="option-text">
+                            <strong>Email</strong>
+                            <small>Detailed inquiry & formal communication</small>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="modal-note">
+                    <p><strong>Note:</strong> Both methods will provide detailed product information, and customization options.</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Add animation
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+
+    // Close modal when clicking overlay
+    modal.querySelector('.modal-overlay').addEventListener('click', closeOrderModal);
+}
+
+// Order via WhatsApp
+function orderViaWhatsApp(shoeName, shoePrice, shoeCategory) {
+    const message = CONFIG.whatsapp.messages.order.replace('{SHOE_NAME}', shoeName);
+    const categoryText = shoeCategory ? ` (Category: ${formatCategoryName(shoeCategory)})` : '';
+    const fullMessage = shoePrice ? `${message} (Price: ${shoePrice})${categoryText}` : message + categoryText;
+
+    // Show loading state
+    showOrderProcessing('WhatsApp');
+
+    setTimeout(() => {
+        window.open(generateWhatsAppURL(fullMessage), '_blank');
+        closeOrderModal();
+        trackWhatsAppClick('order_modal', shoeName, shoeCategory);
+        showNotification('Redirected to WhatsApp. Your inquiry has been prepared!', 'success');
+    }, 800);
+}
+
+// Order via Email
+function orderViaEmail(shoeName, shoePrice, shoeCategory) {
+    const subject = encodeURIComponent(`Order Inquiry - ${shoeName}`);
+    const categoryText = shoeCategory ? `\nCategory: ${formatCategoryName(shoeCategory)}` : '';
+    const priceText = shoePrice ? `\nPrice: ${shoePrice}` : '';
+
+    const body = encodeURIComponent(`Hello Khal Designs,
+
+I am interested in ordering the following item:
+
+Product: ${shoeName}${priceText}${categoryText}
+
+Please provide me with:
+1. Detailed product specifications
+2. Available customization options
+3. Material and color choices
+4. Production timeline
+5. Shipping information
+6. Payment methods
+
+I would also like to know about:
+- Sizing consultation process
+- Return/exchange policy
+- Care instructions
+
+Please let me know the next steps to proceed with my order.
+
+Best regards,
+[Your Name]
+[Your Phone Number]
+[Your Address]`);
+
+    const mailtoLink = `mailto:${CONFIG.email.address}?subject=${subject}&body=${body}`;
+
+    // Show loading state
+    showOrderProcessing('Email');
+
+    setTimeout(() => {
+        try {
+            window.location.href = mailtoLink;
+            closeOrderModal();
+            trackEmailClick('order_modal', shoeName);
+            showNotification('Email client opened. Please complete and send your inquiry!', 'success');
+        } catch (error) {
+            closeOrderModal();
+            showNotification(`Please send your inquiry to: ${CONFIG.email.address}`, 'info');
+        }
+    }, 800);
+}
+
+// Show processing state
+function showOrderProcessing(method) {
+    const modal = document.querySelector('.order-modal .modal-content');
+    if (modal) {
+        modal.innerHTML = `
+            <div class="processing-content">
+                <div class="processing-spinner"></div>
+                <h3>Preparing your ${method} inquiry...</h3>
+                <p>Please wait while we set up your order details.</p>
+            </div>
+        `;
+    }
+}
+
+// Close modal
+function closeOrderModal() {
+    const modal = document.querySelector('.order-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Enhanced tracking for email
+function trackEmailClick(source, shoeName = '') {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'email_click', {
+            'source': source,
+            'shoe_name': shoeName
+        });
+    }
+    console.log(`Email clicked from: ${source}`, shoeName ? `for shoe: ${shoeName}` : '');
+}
+
+// Expose functions globally
+window.closeOrderModal = closeOrderModal;
+window.orderViaWhatsApp = orderViaWhatsApp;
+window.orderViaEmail = orderViaEmail;
 
 function setupApprenticeshipButtons() {
     // WhatsApp application button
@@ -612,6 +811,7 @@ Best regards,
     }
 }
 
+// Enhanced Footer Social Links - Replace updateSocialMediaLinks function
 function updateSocialMediaLinks() {
     const socialLinksContainers = document.querySelectorAll('.social-links');
 
@@ -632,9 +832,14 @@ function updateSocialMediaLinks() {
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
             </a>
-            <a href="${generateWhatsAppURL('Hello Khal Designs! I found you through your website.')}" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Chat with us on WhatsApp">
+            <a href="${generateWhatsAppURL('Hello Khal Designs! I found you through your website.')}" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Chat with us on WhatsApp" onclick="trackWhatsAppClick('footer_social')">
                 <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
+                </svg>
+            </a>
+            <a href="mailto:${CONFIG.email.address}?subject=${encodeURIComponent('Inquiry from Website - Khal Designs')}" class="email" aria-label="Send us an email" onclick="trackEmailClick('footer_social')">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
             </a>
         `;
