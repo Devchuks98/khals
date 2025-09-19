@@ -2278,16 +2278,35 @@ a:focus {
 @media (max-width: 768px) {
     .modal-content {
         width: 95%;
-        margin: 1rem;
+        margin: 0;
         max-height: 95vh;
+        border-radius: 15px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .order-modal.active .modal-content {
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .modal-header {
-        padding: 1.5rem 1.5rem 1rem;
+        padding: 1.5rem 3rem 1rem 1.5rem;
+        border-radius: 15px 15px 0 0;
     }
 
     .modal-header h3 {
         font-size: 1.3rem;
+        margin-right: 1rem;
+    }
+
+    .modal-close {
+        top: 12px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.8rem;
     }
 
     .modal-body {
@@ -2295,35 +2314,48 @@ a:focus {
     }
 
     .order-options {
-        gap: 0.75rem;
+        gap: 1rem;
     }
 
     .order-option {
         padding: 1.25rem;
         flex-direction: row;
         align-items: flex-start;
+        border-radius: 12px;
     }
 
     .option-icon {
         width: 28px;
         height: 28px;
         margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+
+    .option-text {
+        flex: 1;
+        min-width: 0;
     }
 
     .option-text strong {
         font-size: 1rem;
+        display: block;
+        margin-bottom: 0.4rem;
     }
 
     .option-text small {
         font-size: 0.85rem;
+        line-height: 1.4;
+        display: block;
     }
 
     .modal-note {
-        padding: 0.8rem;
+        padding: 1rem;
+        border-radius: 10px;
     }
 
     .modal-note p {
         font-size: 0.85rem;
+        line-height: 1.4;
     }
 }
 
