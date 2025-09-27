@@ -1589,16 +1589,15 @@ a:focus {
     }
 }
 
-/* Category Tabs Styles - Add to existing styles.css */
 
-/* Category Tabs Container */
+/* Enhanced Mobile-Responsive Category Tabs */
 .category-tabs {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     gap: 0.5rem;
     margin: 3rem 0;
     padding: 0 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Individual Tab Buttons */
@@ -1616,6 +1615,7 @@ a:focus {
     white-space: nowrap;
     position: relative;
     overflow: hidden;
+    min-width: fit-content;
 }
 
 .category-tab::before {
@@ -1646,6 +1646,185 @@ a:focus {
 .category-tab:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+}
+
+/* Mobile Responsive - Horizontal Scrollable Tabs */
+@media (max-width: 768px) {
+    .category-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+        margin: 2rem 0;
+        padding: 0 1rem 0.5rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    /* Hide scrollbar for WebKit browsers */
+    .category-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-tab {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+        min-width: 120px;
+        text-align: center;
+        border-width: 1px;
+    }
+
+    /* Add scroll indicators */
+    .category-tabs-container {
+        position: relative;
+    }
+
+    .category-tabs-container::before,
+    .category-tabs-container::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 30px;
+        background: linear-gradient(90deg, var(--light-color), transparent);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .category-tabs-container::before {
+        left: 0;
+    }
+
+    .category-tabs-container::after {
+        right: 0;
+        background: linear-gradient(-90deg, var(--light-color), transparent);
+    }
+
+    /* Scroll hint text */
+    .tabs-scroll-hint {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-bottom: 1rem;
+        opacity: 0.7;
+    }
+}
+
+/* Very small screens - even more compact */
+@media (max-width: 480px) {
+    .category-tabs {
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+        padding: 0 0.5rem 0.5rem;
+    }
+
+    .category-tab {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        border-radius: 18px;
+        min-width: 100px;
+    }
+
+    .tabs-scroll-hint {
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Improved scrollbar styling for desktop */
+@media (min-width: 769px) {
+    .category-tabs {
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+}
+
+/* Enhanced focus and accessibility */
+.category-tab:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    border-color: var(--primary-color);
+}
+
+/* Active state improvements */
+.category-tab.active {
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover improvements for mobile */
+@media (hover: hover) {
+    .category-tab:hover {
+        transform: translateY(-2px);
+    }
+}
+
+@media (hover: none) {
+    .category-tab:hover {
+        transform: none;
+    }
+
+    .category-tab:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Loading state for category switching */
+.category-tabs.loading .category-tab:not(.active) {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Smooth scroll behavior */
+.category-tabs {
+    scroll-behavior: smooth;
+}
+
+/* Add subtle animation when tabs load */
+.category-tab {
+    animation: slideInUp 0.3s ease-out backwards;
+}
+
+.category-tab:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.category-tab:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.category-tab:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.category-tab:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.category-tab:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Category Empty State */
