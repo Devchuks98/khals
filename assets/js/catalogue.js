@@ -7,7 +7,7 @@ const CATALOGUE_DATA = {
         // Featured Products - Only these show in "Featured Products" tab
         { name: "Men Slides", price: "₦45,000", image: "men_slides1.jpg", category: "trendy-slides", featured: true, description: "Stylish slides for casual wear." },
         { name: "Classic Brogues", price: "₦200,000", image: "brogues.jpg", category: "brogues", featured: true, description: "Classic brogues featuring decorative perforations and wingtip design." },
-        { name: "Comfort Sneakers", price: "₦180,000", image: "casual_shoes.jpg", category: "casual-shoes", featured: true, description: "Everyday comfort, perfect for campus and city strolls." },
+        { name: "Comfort Sneakers", price: "₦150,000", image: "casual_shoes.jpg", category: "casual-shoes", featured: true, description: "Everyday comfort, perfect for campus and city strolls." },
         { name: "Classic Loafers", price: "₦150,000", image: "loafers.jpg", category: "loafers", featured: true, description: "Classic slip-on shoes for versatile styling." },
         { name: "Classic Mules", price: "₦90,000", image: "mules.jpg", category: "mules", featured: true, description: "Backless elegance for an effortless and chic look." },
         { name: "Elegant Shoe Sandal", price: "₦100,000", image: "shoe_sandals.jpg", category: "shoe-sandal", featured: true, description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
@@ -65,7 +65,10 @@ const CATALOGUE_DATA = {
         { name: "Classic Suede Loafers", price: "₦150,000", image: "suede_loafers.jpg", category: "suede-loafers", description: "Soft suede texture with comfortable fit." },
 
         // Casual Shoes
-        { name: "White Sole Sneakers", price: "₦150,000", image: "white_cup_soles.jpg", category: "casual-shoes", description: "Modern sneakers with white soles for everyday wear." },
+        { name: "Casual", price: "₦150,000", image: "white_cup_soles.jpg", category: "casual-shoes", description: "Effortless style for relaxed outings. The perfect balance of smart and casual." },
+        { name: "Casual", price: "₦150,000", image: "casual1.jpeg", category: "casual-shoes", description: "Classic low-top comfort. The versatile foundation for any modern wardrobe." },
+        { name: "Casual", price: "₦150,000", image: "casual2.jpeg", category: "casual-shoes", description: "Effortless style for relaxed outings. The perfect balance of smart and casual." },
+        { name: "Casual", price: "₦150,000", image: "casual3.jpeg", category: "casual-shoes", description: "Designed for all-day ease. Your go-to footwear for any casual occasion." },
 
         // Corporate Shoes
         { name: "Corporate Casual", price: "₦150,000", image: "coperate.jpeg", category: "corporate-shoes", description: "Professional yet comfortable for office wear." },
