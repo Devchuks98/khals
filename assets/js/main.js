@@ -42,6 +42,14 @@ function initializeWebsite() {
         initUXEnhancements();
     }, 200);
 
+    setTimeout(() => {
+        initImageOptimization();
+        initImageErrorHandling();
+        initImageViewerKeyboard();
+        initTouchGestures();
+        measureImageLoadTimes();
+    }, 300);
+
     // WhatsApp integration (delayed for better performance)
     setTimeout(() => {
         initWhatsAppIntegration();
@@ -160,13 +168,19 @@ function switchCategory(category) {
 
         shoeCards.forEach(card => {
             const cardCategory = card.dataset.category;
-            const shouldShow = category === 'all' || cardCategory === category;
+            const shouldShow = category === 'all' ? card.dataset.featured === 'true' : cardCategory === category;
 
             if (shouldShow) {
                 card.classList.remove('hidden');
                 card.classList.add('visible');
                 card.style.display = 'block';
                 visibleCount++;
+
+                // Ensure image loads properly when shown
+                const img = card.querySelector('.shoe-image');
+                if (img && !img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
             } else {
                 card.classList.add('hidden');
                 card.classList.remove('visible');
@@ -174,7 +188,7 @@ function switchCategory(category) {
             }
         });
 
-        // Handle empty state with catalog integration
+        // Handle empty state
         handleCategoryEmptyState(visibleCount, category);
 
         // Remove loading state
@@ -1195,3 +1209,277 @@ window.orderShoe = function (shoeName) {
     window.open(generateWhatsAppURL(message), '_blank');
     trackWhatsAppClick('order_function', shoeName);
 };
+
+// Global functions for image viewer
+window.openImageViewer = function (imageElement, title, price) {
+    const viewer = document.getElementById('imageViewer');
+    const viewerImage = document.getElementById('viewerImage');
+    const viewerTitle = document.getElementById('viewerTitle');
+    const viewerPrice = document.getElementById('viewerPrice');
+
+    if (!viewer || !viewerImage) return;
+
+    // Set image source and details
+    viewerImage.src = imageElement.src;
+    viewerImage.alt = imageElement.alt || title;
+
+    if (viewerTitle) viewerTitle.textContent = title || '';
+    if (viewerPrice) viewerPrice.textContent = price || '';
+
+    // Show viewer with animation
+    viewer.classList.add('active');
+    viewer.style.display = 'flex';
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+
+    // Focus management for accessibility
+    viewer.focus();
+
+    // Track image view for analytics
+    if (typeof trackImageView === 'function') {
+        trackImageView(title, imageElement.src);
+    }
+
+    console.log('Image viewer opened for:', title);
+};
+
+window.closeImageViewer = function () {
+    const viewer = document.getElementById('imageViewer');
+
+    if (!viewer) return;
+
+    // Hide viewer with animation
+    viewer.classList.remove('active');
+
+    setTimeout(() => {
+        viewer.style.display = 'none';
+    }, 300);
+
+    // Restore body scroll
+    document.body.style.overflow = '';
+
+    console.log('Image viewer closed');
+};
+function initImageOptimization() {
+    // Lazy loading for images
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+
+                    // Load high-quality image if data-src exists
+                    if (img.dataset.src && img.dataset.src !== img.src) {
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                    }
+
+                    // Add loaded class for smooth transition
+                    if (!img.classList.contains('loaded')) {
+                        img.classList.add('loaded');
+                    }
+
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        });
+
+        // Observe all shoe images
+        setTimeout(() => {
+            document.querySelectorAll('.shoe-image').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }, 500);
+    }
+
+    // Preload featured images
+    preloadFeaturedImages();
+}
+
+function preloadFeaturedImages() {
+    const featuredCards = document.querySelectorAll('[data-featured="true"] .shoe-image');
+
+    featuredCards.forEach(img => {
+        if (img.src) {
+            const preloadImg = new Image();
+            preloadImg.src = img.src;
+        }
+    });
+}
+
+
+function handleImageError(imageElement) {
+    // Fallback image or placeholder
+    imageElement.style.background = 'linear-gradient(135deg, var(--light-color), var(--accent-color))';
+    imageElement.style.display = 'flex';
+    imageElement.style.alignItems = 'center';
+    imageElement.style.justifyContent = 'center';
+    imageElement.innerHTML = '<span style="color: var(--text-light); font-size: 0.9rem;">Image not available</span>';
+
+    console.warn('Image failed to load:', imageElement.src);
+}
+
+// Add error handling to all images
+function initImageErrorHandling() {
+    document.querySelectorAll('.shoe-image').forEach(img => {
+        img.addEventListener('error', () => handleImageError(img));
+    });
+}
+
+// ========================================
+// KEYBOARD NAVIGATION FOR IMAGE VIEWER
+// ========================================
+
+function initImageViewerKeyboard() {
+    document.addEventListener('keydown', (event) => {
+        const viewer = document.getElementById('imageViewer');
+
+        if (!viewer || !viewer.classList.contains('active')) return;
+
+        switch (event.key) {
+            case 'Escape':
+                event.preventDefault();
+                closeImageViewer();
+                break;
+            case 'Enter':
+            case ' ':
+                event.preventDefault();
+                closeImageViewer();
+                break;
+        }
+    });
+}
+
+// ========================================
+// TOUCH GESTURES FOR MOBILE
+// ========================================
+
+function initTouchGestures() {
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const viewer = document.getElementById('imageViewer');
+    if (!viewer) return;
+
+    viewer.addEventListener('touchstart', (event) => {
+        touchStartY = event.changedTouches[0].screenY;
+    }, { passive: true });
+
+    viewer.addEventListener('touchend', (event) => {
+        touchEndY = event.changedTouches[0].screenY;
+
+        // Swipe down to close (minimum 100px swipe)
+        if (touchStartY - touchEndY < -100) {
+            closeImageViewer();
+        }
+    }, { passive: true });
+}
+function trackImageView(title, src) {
+    // Analytics tracking for image views
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'image_view', {
+            'item_name': title,
+            'item_id': src.split('/').pop(),
+            'content_type': 'product_image'
+        });
+    }
+
+    console.log('Image view tracked:', title);
+}
+
+function measureImageLoadTimes() {
+    if (!('PerformanceObserver' in window)) return;
+
+    const observer = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+            if (entry.name.includes('shoes/')) {
+                console.log(`Image load time: ${entry.name.split('/').pop()} - ${entry.duration}ms`);
+            }
+        });
+    });
+
+    observer.observe({ entryTypes: ['resource'] });
+}
+function getImageDimensions(src) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve({ width: img.width, height: img.height });
+        img.onerror = reject;
+        img.src = src;
+    });
+}
+
+function optimizeImageForDevice(src) {
+    // Simple responsive image optimization
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    const screenWidth = window.innerWidth;
+
+    // For high DPI displays, we might want higher quality
+    if (devicePixelRatio > 1 && screenWidth < 768) {
+        // Mobile high DPI - might want to serve @2x images
+        return src.replace('.jpg', '@2x.jpg').replace('.png', '@2x.png');
+    }
+
+    return src;
+}
+
+
+function announceImageChange(title) {
+    // Create accessible announcement for screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'sr-only';
+    announcement.textContent = `Now viewing ${title}`;
+
+    document.body.appendChild(announcement);
+
+    setTimeout(() => {
+        document.body.removeChild(announcement);
+    }, 1000);
+}
+
+// Screen reader only class for accessibility
+const srOnlyCSS = `
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+`;
+
+// Add SR-only styles
+if (!document.querySelector('#sr-only-styles')) {
+    const style = document.createElement('style');
+    style.id = 'sr-only-styles';
+    style.textContent = srOnlyCSS;
+    document.head.appendChild(style);
+}
+
+// ========================================
+// ERROR RECOVERY
+// ========================================
+
+function handleImageViewerError() {
+    console.error('Image viewer encountered an error');
+    closeImageViewer();
+    showNotification('Unable to display image. Please try again.', 'error');
+}
+
+// Add global error handling
+window.addEventListener('error', (event) => {
+    if (event.filename && event.filename.includes('main.js') &&
+        event.message.toLowerCase().includes('image')) {
+        handleImageViewerError();
+    }
+});
