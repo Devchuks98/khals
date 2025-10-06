@@ -4,23 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Browse our handcrafted shoe collection - premium leather footwear and accessories">
     <title>Catalogue - Khal Bespoke Shoemaking</title>
     <link rel="icon" type="image/png" href="../assets/images/icons/khal_logo2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/catalogue.css">
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="../assets/images/icons/khal_logo2.png">
 </head>
 
 <body>
     <header>
         <nav>
             <a href="../" class="logo">
-                <img src="../assets/images/icons/khal_logo2.png" alt="Khal Designs Logo">
+                <img src="../assets/images/icons/khal_logo2.png" alt="Khal Designs Logo" width="45" height="45">
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="../">Home</a></li>
-                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="catalogue.html" class="active">Catalogue</a></li>
                 <li><a href="apprenticeship.html">Apprenticeship</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation menu" role="button" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -29,8 +35,8 @@
     </header>
 
     <!-- Image Viewer Modal -->
-    <div class="image-viewer" id="imageViewer">
-        <div class="image-viewer-overlay" onclick="closeImageViewer()"></div>
+    <div class="image-viewer" id="imageViewer" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="image-viewer-overlay" onclick="closeImageViewer()" aria-hidden="true"></div>
         <div class="image-viewer-content">
             <button class="image-viewer-close" onclick="closeImageViewer()"
                 aria-label="Close image viewer">&times;</button>
@@ -45,18 +51,18 @@
     <main class="page-section">
         <div class="container">
             <div class="section-title">
-                <h2>Our Shoe Collection</h2>
+                <h1>Our Shoe Collection</h1>
                 <p>Each pair is meticulously handcrafted using traditional techniques and premium materials</p>
             </div>
 
             <!-- Category Tabs Container -->
             <div class="category-tabs-container">
-                <div class="category-tabs" id="categoryTabs"></div>
+                <div class="category-tabs" id="categoryTabs" role="tablist" aria-label="Product categories"></div>
             </div>
 
             <!-- Search -->
             <div class="catalogue-search">
-                <input type="text" id="catalogueSearch" placeholder="Search shoes..." aria-label="Search shoes">
+                <input type="search" id="catalogueSearch" placeholder="Search shoes..." aria-label="Search shoes">
                 <span class="search-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8" />
@@ -66,10 +72,11 @@
             </div>
 
             <!-- Shoe Grid -->
-            <div class="catalogue-grid" id="catalogueGrid"></div>
+            <div class="catalogue-grid" id="catalogueGrid" role="region" aria-label="Product grid"></div>
 
             <!-- Category Empty State -->
-            <div class="category-empty-state" id="categoryEmptyState" style="display: none;"></div>
+            <div class="category-empty-state" id="categoryEmptyState" style="display: none;" role="status"
+                aria-live="polite"></div>
         </div>
     </main>
 
@@ -79,7 +86,8 @@
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <p>39 Moloney street by Herbert Macaulay<br>Adekunle, sabo yaba Lagos</p>
-                    <p>(234) 8147994796<br>vezenachukwu@gmail.com</p>
+                    <p><a href="tel:+2348147994796">(234) 8147994796</a><br><a
+                            href="mailto:vezenachukwu@gmail.com">vezenachukwu@gmail.com</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Workshop Hours</h3>
@@ -97,8 +105,9 @@
         </div>
     </footer>
 
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/catalogue.js"></script>
+    <!-- Scripts -->
+    <script src="../assets/js/main.js" defer></script>
+    <script src="../assets/js/catalogue.js" defer></script>
 </body>
 
 </html>
