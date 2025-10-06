@@ -134,6 +134,17 @@ const CATALOGUE_DATA = {
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers5.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers6.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+
+        // Female Slides
+        { name: "Female Slides", price: "₦35,000", image: "female_slides.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides2.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides3.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides4.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides5.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides6.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides7.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides8.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "₦35,000", image: "female_slides9.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
     ],
 
     categories: [
@@ -153,6 +164,7 @@ const CATALOGUE_DATA = {
         { id: 'trendy-slides', label: 'Trendy Men Slides' },
         { id: 'box-slides', label: 'Box Slides' },
         { id: 'mules', label: 'Mules' },
+        { id: 'female-slides', label: 'Female Slides' },
         { id: 'accessories', label: 'Accessories' }
     ]
 };
