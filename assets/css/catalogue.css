@@ -1,0 +1,542 @@
+/* ========================================
+   CATALOGUE-SPECIFIC STYLES
+   Optimized for Performance
+   ======================================== */
+
+/* Category Tabs Container - Horizontal Scroll */
+.category-tabs-container {
+    position: sticky;
+    top: 80px;
+    background: var(--light-color);
+    z-index: 100;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.category-tabs-container.stuck {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--light-color);
+}
+
+/* Hide scrollbar but keep functionality */
+.category-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-tabs::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.category-tabs::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* Individual Tab Buttons */
+.category-tab {
+    background: var(--white);
+    border: 2px solid var(--accent-color);
+    color: var(--dark-color);
+    padding: 10px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.category-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    transition: left 0.2s ease;
+    z-index: -1;
+}
+
+.category-tab.active::before {
+    left: 0;
+}
+
+.category-tab.active {
+    color: var(--white);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.category-tab:active {
+    transform: scale(0.98);
+}
+
+/* Search Styles */
+.catalogue-search {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    position: relative;
+}
+
+.catalogue-search input {
+    width: 100%;
+    padding: 14px 50px 14px 20px;
+    border: 2px solid var(--accent-color);
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.2s ease;
+}
+
+.catalogue-search input:focus {
+    border-color: var(--secondary-color);
+}
+
+.catalogue-search .search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    pointer-events: none;
+}
+
+/* Catalogue Grid - Optimized */
+.catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    will-change: contents;
+}
+
+/* Shoe Card - Performance Optimized */
+.shoe-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+    contain: layout style paint;
+}
+
+.shoe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Image Container - Optimized */
+.shoe-image-container {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    background: var(--light-color);
+    cursor: pointer;
+    will-change: transform;
+}
+
+.shoe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+    background: var(--light-color);
+}
+
+/* Lazy loading states */
+.shoe-image[data-src] {
+    opacity: 0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.shoe-image.loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.shoe-image-container:active {
+    transform: scale(0.98);
+}
+
+/* Image Overlay */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.shoe-image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.shoe-label {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.view-image-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.view-image-btn:active {
+    transform: scale(0.9);
+}
+
+/* Card Content */
+.shoe-card-content {
+    padding: 1.25rem;
+}
+
+.shoe-card-content h3 {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.shoe-description {
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.shoe-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin: 0.75rem 0;
+}
+
+.order-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border: none;
+    padding: 11px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.order-button:active {
+    transform: scale(0.98);
+}
+
+/* Image Viewer Modal - Performance Optimized */
+.image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20000;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.image-viewer.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+
+.image-viewer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.image-viewer-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: zoomIn 0.2s ease;
+}
+
+.image-viewer-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.image-viewer-close:active {
+    transform: scale(0.9);
+}
+
+.viewer-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+}
+
+.image-viewer-info {
+    padding: 1.25rem;
+    text-align: center;
+    background: white;
+}
+
+.image-viewer-info h3 {
+    color: var(--dark-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+}
+
+.image-viewer-info p {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Empty State */
+.enhanced-empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.enhanced-empty-state h3 {
+    color: var(--dark-color);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.catalog-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.whatsapp-catalog-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.whatsapp-catalog-btn:active {
+    transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .category-tabs-container {
+        top: 70px;
+        padding: 0.75rem 0;
+    }
+
+    .category-tabs {
+        padding: 0 0.5rem;
+        gap: 0.4rem;
+    }
+
+    .category-tab {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .catalogue-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    .shoe-image-container {
+        height: 180px;
+    }
+
+    .shoe-card-content {
+        padding: 1rem;
+    }
+
+    .shoe-card-content h3 {
+        font-size: 1rem;
+    }
+
+    .shoe-description {
+        font-size: 0.85rem;
+    }
+
+    .shoe-price {
+        font-size: 1.1rem;
+    }
+
+    .order-button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .image-viewer-content {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+
+    .viewer-image {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalogue-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .shoe-image-container {
+        height: 160px;
+    }
+
+    .category-tab {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Performance: Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+
+    .shoe-card,
+    .shoe-image,
+    .category-tab,
+    .order-button,
+    .image-viewer,
+    .image-viewer-content {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Performance: GPU acceleration for smooth animations */
+.shoe-card,
+.shoe-image-container,
+.category-tab {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

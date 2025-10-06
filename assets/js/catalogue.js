@@ -1,4 +1,5 @@
-// Optimized Catalogue Management Module
+// ============================================================================
+// OPTIMIZED CATALOGUE MANAGEMENT - High Performance
 // ============================================================================
 
 const CATALOGUE_DATA = {
@@ -169,7 +170,10 @@ const CATALOGUE_DATA = {
     ]
 };
 
-// Optimized Catalogue Manager
+// ============================================================================
+// OPTIMIZED CATALOGUE MANAGER
+// ============================================================================
+
 class CatalogueManager {
     constructor() {
         this.products = CATALOGUE_DATA.products;
@@ -179,16 +183,22 @@ class CatalogueManager {
         this.imageObserver = null;
         this.searchTimeout = null;
         this.stickyTabsObserver = null;
+        this.renderedCards = new Map(); // Cache rendered cards
     }
 
     init() {
-        this.createCategoryTabs();
-        this.renderProducts();
-        this.attachEventListeners();
-        this.initializeCategoryFromURL();
-        this.setupLazyLoading();
-        this.setupStickyTabs();
-        console.log('✅ Catalogue initialized');
+        try {
+            this.createCategoryTabs();
+            this.renderProducts();
+            this.attachEventListeners();
+            this.initializeCategoryFromURL();
+            this.setupLazyLoading();
+            this.setupStickyTabs();
+            console.log('✅ Catalogue initialized');
+        } catch (error) {
+            console.error('❌ Catalogue initialization error:', error);
+            this.showErrorState('Failed to load catalogue. Please refresh the page.');
+        }
     }
 
     setupStickyTabs() {
@@ -197,35 +207,63 @@ class CatalogueManager {
 
         const sentinel = document.createElement('div');
         sentinel.className = 'sticky-sentinel';
+        sentinel.style.position = 'absolute';
+        sentinel.style.top = '0';
+        sentinel.style.height = '1px';
         container.parentNode.insertBefore(sentinel, container);
 
         this.stickyTabsObserver = new IntersectionObserver(
             ([entry]) => {
                 container.classList.toggle('stuck', !entry.isIntersecting);
             },
-            { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
+            { threshold: [1], rootMargin: '-80px 0px 0px 0px' }
         );
 
         this.stickyTabsObserver.observe(sentinel);
     }
 
     setupLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            this.imageObserver = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                            delete img.dataset.src;
-                            this.imageObserver.unobserve(img);
-                        }
-                    });
-                },
-                { rootMargin: '50px' }
-            );
+        if (!('IntersectionObserver' in window)) {
+            // Fallback: load all images immediately
+            this.loadAllImages();
+            return;
         }
+
+        this.imageObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        this.loadImage(img);
+                        this.imageObserver.unobserve(img);
+                    }
+                });
+            },
+            {
+                rootMargin: '100px', // Load images 100px before they come into view
+                threshold: 0.01
+            }
+        );
+    }
+
+    loadImage(img) {
+        const src = img.dataset.src;
+        if (!src) return;
+
+        img.src = src;
+        img.onload = () => {
+            img.classList.add('loaded');
+            delete img.dataset.src;
+        };
+        img.onerror = () => {
+            console.error('Failed to load image:', src);
+            img.src = '../assets/images/placeholder.jpg'; // Fallback image
+            img.classList.add('loaded');
+        };
+    }
+
+    loadAllImages() {
+        document.querySelectorAll('img[data-src]').forEach(img => this.loadImage(img));
     }
 
     createCategoryTabs() {
@@ -238,6 +276,7 @@ class CatalogueManager {
             button.className = `category-tab${cat.id === 'all' ? ' active' : ''}`;
             button.dataset.category = cat.id;
             button.textContent = cat.label;
+            button.type = 'button';
             fragment.appendChild(button);
         });
         container.appendChild(fragment);
@@ -248,21 +287,29 @@ class CatalogueManager {
         if (!grid) return;
 
         const fragment = document.createDocumentFragment();
-        this.products.forEach(product => {
-            const card = this.createShoeCard(product);
-            fragment.appendChild(card);
+
+        this.products.forEach((product, index) => {
+            try {
+                const card = this.createShoeCard(product, index);
+                fragment.appendChild(card);
+            } catch (error) {
+                console.error('Error rendering product:', product.name, error);
+            }
         });
+
         grid.appendChild(fragment);
 
+        // Start lazy loading
         if (this.imageObserver) {
             grid.querySelectorAll('img[data-src]').forEach(img => this.imageObserver.observe(img));
         }
     }
 
-    createShoeCard(product) {
+    createShoeCard(product, index) {
         const card = document.createElement('div');
         card.className = 'shoe-card';
         card.dataset.category = product.category;
+        card.dataset.index = index;
         if (product.featured) card.dataset.featured = 'true';
 
         const imageSrc = `../assets/images/shoes/${product.image}`;
@@ -272,8 +319,8 @@ class CatalogueManager {
                 <img data-src="${imageSrc}" alt="${product.name}" class="shoe-image" loading="lazy">
                 <div class="image-overlay">
                     <span class="shoe-label">${product.name}</span>
-                    <button class="view-image-btn" aria-label="View ${product.name}">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                    <button class="view-image-btn" aria-label="View ${product.name}" type="button">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                             <path d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z" />
                         </svg>
                     </button>
@@ -283,26 +330,36 @@ class CatalogueManager {
                 <h3>${product.name}</h3>
                 <div class="shoe-price">${product.price}</div>
                 <p class="shoe-description">${product.description}</p>
-                <button class="order-button" data-shoe="${product.name}" data-price="${product.price}" data-category="${product.category}">Order Now</button>
+                <button class="order-button" type="button" data-shoe="${product.name}" data-price="${product.price}" data-category="${product.category}">Order Now</button>
             </div>
         `;
 
-        // Add event listeners directly
+        // Cache the card
+        this.renderedCards.set(index, card);
+
+        // Attach click event for image viewer
         const imageContainer = card.querySelector('.shoe-image-container');
-        imageContainer.addEventListener('click', () => {
+        imageContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
             const img = imageContainer.querySelector('img');
-            window.openImageViewer(img, product.name, product.price);
-        });
+            if (img.src && img.src !== window.location.href) {
+                window.openImageViewer(img, product.name, product.price);
+            }
+        }, { passive: true });
 
         return card;
     }
 
     attachEventListeners() {
         // Category tabs with event delegation
-        document.getElementById('categoryTabs')?.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('category-tab')) return;
-            this.handleCategoryClick(e.target);
-        });
+        const tabsContainer = document.getElementById('categoryTabs');
+        if (tabsContainer) {
+            tabsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('category-tab')) {
+                    this.handleCategoryClick(e.target);
+                }
+            }, { passive: true });
+        }
 
         // Search with debounce
         const searchInput = document.getElementById('catalogueSearch');
@@ -312,22 +369,32 @@ class CatalogueManager {
                 this.searchTimeout = setTimeout(() => {
                     this.searchQuery = e.target.value.trim().toLowerCase();
                     this.filterProducts();
-                }, 200);
-            });
+                }, 300); // Increased debounce time
+            }, { passive: true });
         }
 
         // Hash change
-        window.addEventListener('hashchange', () => this.initializeCategoryFromURL());
+        window.addEventListener('hashchange', () => this.initializeCategoryFromURL(), { passive: true });
     }
 
     handleCategoryClick(tab) {
-        // Quick active state update
-        const tabs = document.querySelectorAll('.category-tab');
-        tabs.forEach(t => t.classList.toggle('active', t === tab));
+        // Remove active from all tabs
+        document.querySelectorAll('.category-tab').forEach(t =>
+            t.classList.remove('active')
+        );
+
+        // Add active to clicked tab
+        tab.classList.add('active');
 
         this.currentCategory = tab.dataset.category;
         this.filterProducts();
         this.updateURL();
+
+        // Smooth scroll to top of category tabs
+        const container = document.querySelector('.category-tabs-container');
+        if (container) {
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     filterProducts() {
@@ -352,12 +419,18 @@ class CatalogueManager {
                 }
 
                 const shouldShow = matchesCategory && matchesSearch;
-                card.style.display = shouldShow ? 'block' : 'none';
 
                 if (shouldShow) {
+                    card.style.display = 'block';
                     visibleCount++;
+
+                    // Lazy load images for visible cards
                     const img = card.querySelector('img[data-src]');
-                    if (img && this.imageObserver) this.imageObserver.observe(img);
+                    if (img && this.imageObserver) {
+                        this.imageObserver.observe(img);
+                    }
+                } else {
+                    card.style.display = 'none';
                 }
             });
 
@@ -387,13 +460,13 @@ class CatalogueManager {
                 <p>${this.searchQuery ? `No matches for "${this.searchQuery}" in ${categoryName}` : `No ${categoryName} available`}</p>
                 <p><strong>Browse our WhatsApp catalog for 100+ designs</strong></p>
                 <div class="catalog-cta-buttons">
-                    <a href="${catalogURL}" target="_blank" class="whatsapp-catalog-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                    <a href="${catalogURL}" target="_blank" rel="noopener noreferrer" class="whatsapp-catalog-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                             <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
                         </svg>
                         Browse Full Catalog
                     </a>
-                    ${this.searchQuery ? '<button class="search-reset-btn" onclick="catalogueManager.clearSearch()">Clear Search</button>' : ''}
+                    ${this.searchQuery ? '<button type="button" class="search-reset-btn" onclick="catalogueManager.clearSearch()">Clear Search</button>' : ''}
                 </div>
             </div>
         `;
@@ -403,7 +476,9 @@ class CatalogueManager {
         const hash = window.location.hash.substring(1);
         if (hash && this.categories.find(c => c.id === hash)) {
             const tab = document.querySelector(`[data-category="${hash}"]`);
-            if (tab) this.handleCategoryClick(tab);
+            if (tab) {
+                this.handleCategoryClick(tab);
+            }
         }
     }
 
@@ -421,55 +496,103 @@ class CatalogueManager {
         }
     }
 
+    showErrorState(message) {
+        const grid = document.getElementById('catalogueGrid');
+        const emptyState = document.getElementById('categoryEmptyState');
+
+        if (grid && emptyState) {
+            grid.style.display = 'none';
+            emptyState.style.display = 'block';
+            emptyState.innerHTML = `
+                <div class="enhanced-empty-state">
+                    <div class="empty-icon">⚠️</div>
+                    <h3>Oops! Something went wrong</h3>
+                    <p>${message}</p>
+                    <button type="button" class="whatsapp-catalog-btn" onclick="location.reload()">
+                        Refresh Page
+                    </button>
+                </div>
+            `;
+        }
+    }
+
     destroy() {
         clearTimeout(this.searchTimeout);
         this.imageObserver?.disconnect();
         this.stickyTabsObserver?.disconnect();
+        this.renderedCards.clear();
     }
 }
 
-// Image Viewer Functions (optimized)
+// ============================================================================
+// IMAGE VIEWER FUNCTIONS
+// ============================================================================
+
 window.openImageViewer = function (imgElement, name, price) {
-    const viewer = document.getElementById('imageViewer');
-    const viewerImg = document.getElementById('viewerImage');
-    const viewerTitle = document.getElementById('viewerTitle');
-    const viewerPrice = document.getElementById('viewerPrice');
+    try {
+        const viewer = document.getElementById('imageViewer');
+        const viewerImg = document.getElementById('viewerImage');
+        const viewerTitle = document.getElementById('viewerTitle');
+        const viewerPrice = document.getElementById('viewerPrice');
 
-    if (!viewer || !viewerImg) return;
+        if (!viewer || !viewerImg) return;
 
-    viewerImg.src = imgElement.src || imgElement.dataset.src;
-    viewerTitle.textContent = name;
-    viewerPrice.textContent = price;
+        const imgSrc = imgElement.src || imgElement.dataset.src;
+        if (!imgSrc || imgSrc === window.location.href) return;
 
-    requestAnimationFrame(() => {
-        viewer.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
+        viewerImg.src = imgSrc;
+        viewerTitle.textContent = name;
+        viewerPrice.textContent = price;
+
+        requestAnimationFrame(() => {
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    } catch (error) {
+        console.error('Error opening image viewer:', error);
+    }
 };
 
 window.closeImageViewer = function () {
-    const viewer = document.getElementById('imageViewer');
-    if (!viewer) return;
+    try {
+        const viewer = document.getElementById('imageViewer');
+        if (!viewer) return;
 
-    viewer.classList.remove('active');
-    document.body.style.overflow = '';
+        viewer.classList.remove('active');
+        document.body.style.overflow = '';
+    } catch (error) {
+        console.error('Error closing image viewer:', error);
+    }
 };
 
-// Initialize
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
 let catalogueManager;
 
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('catalogueGrid')) {
-        catalogueManager = new CatalogueManager();
-        catalogueManager.init();
+        try {
+            catalogueManager = new CatalogueManager();
+            catalogueManager.init();
+        } catch (error) {
+            console.error('Failed to initialize catalogue:', error);
+        }
     }
 });
 
-window.addEventListener('beforeunload', () => catalogueManager?.destroy());
+window.addEventListener('beforeunload', () => {
+    try {
+        catalogueManager?.destroy();
+    } catch (error) {
+        console.error('Error during cleanup:', error);
+    }
+});
 
 // Global tracking function
 window.trackCatalogClick = (source, term = '') => {
     if (typeof trackWhatsAppClick === 'function') {
         trackWhatsAppClick(`catalog_${source}`, term);
     }
-};
+}; 
