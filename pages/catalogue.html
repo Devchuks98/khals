@@ -42,25 +42,20 @@
         </div>
     </div>
 
-    <!-- Updated section in your catalogue.html -->
     <main class="page-section">
         <div class="container">
-            <div class="section-title animate-on-scroll">
+            <div class="section-title">
                 <h2>Our Shoe Collection</h2>
                 <p>Each pair is meticulously handcrafted using traditional techniques and premium materials</p>
             </div>
 
-            <!-- Enhanced Category Tabs Container -->
+            <!-- Category Tabs Container -->
             <div class="category-tabs-container">
-                <!-- Mobile scroll hint -->
-                <div class="tabs-scroll-hint">← Swipe to see all categories →</div>
-
-                <!-- Category Tabs -->
-                <div class="category-tabs animate-on-scroll" id="categoryTabs"></div>
+                <div class="category-tabs" id="categoryTabs"></div>
             </div>
 
             <!-- Search -->
-            <div class="catalogue-search animate-on-scroll">
+            <div class="catalogue-search">
                 <input type="text" id="catalogueSearch" placeholder="Search shoes..." aria-label="Search shoes">
                 <span class="search-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,12 +69,7 @@
             <div class="catalogue-grid" id="catalogueGrid"></div>
 
             <!-- Category Empty State -->
-            <div class="category-empty-state" id="categoryEmptyState" style="display: none;">
-                <div class="empty-state-content">
-                    <h3>No shoes found in this category</h3>
-                    <p>Try selecting a different category or using the search function.</p>
-                </div>
-            </div>
+            <div class="category-empty-state" id="categoryEmptyState" style="display: none;"></div>
         </div>
     </main>
 
@@ -88,32 +78,25 @@
             <div class="footer-info">
                 <div class="footer-section">
                     <h3>Contact Info</h3>
-                    <p>39 Moloney street by Herbert Macaulay<br>
-                        Adekunle, sabo yaba Lagos</p>
-                    <p>(234) 8147994796<br>
-                        vezenachukwu@gmail.com</p>
+                    <p>39 Moloney street by Herbert Macaulay<br>Adekunle, sabo yaba Lagos</p>
+                    <p>(234) 8147994796<br>vezenachukwu@gmail.com</p>
                 </div>
                 <div class="footer-section">
                     <h3>Workshop Hours</h3>
-                    <p>Monday - Saturday: 9:00 AM - 6:00 PM<br>
-                        Sunday: Closed</p>
+                    <p>Monday - Saturday: 9:00 AM - 6:00 PM<br>Sunday: Closed</p>
                 </div>
                 <div class="footer-section">
                     <h3>Follow Us</h3>
                     <p>Stay connected for updates on new collections and apprenticeship openings.</p>
-                    <div class="social-links">
-                        <!-- Auto-populated by JavaScript -->
-                    </div>
+                    <div class="social-links"></div>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2025 Khal. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Load main JavaScript first, then catalogue-specific script -->
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/catalogue.js"></script>
 </body>

@@ -1165,11 +1165,7 @@ footer {
 }
 
 /* Animation classes */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
+
 
 .animate-on-scroll.animated {
     opacity: 1;
@@ -1779,11 +1775,7 @@ a:focus {
     }
 }
 
-/* Loading state for category switching */
-.catalogue-grid.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
+
 
 .catalogue-grid.loading::after {
     content: 'Loading...';
