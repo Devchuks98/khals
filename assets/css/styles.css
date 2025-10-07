@@ -2048,3 +2048,23 @@ a:focus {
         height: 18px;
     }
 }
+
+/* ========================================
+   FOOTER LINK STYLES
+   Add this to your styles.css file
+   ======================================== */
+
+/* Ensure footer text and links are white */
+.footer-section p,
+.footer-section a {
+    color: var(--white) !important;
+}
+
+.footer-section a {
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer-section a:hover {
+    opacity: 0.8;
+}
