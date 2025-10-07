@@ -20,6 +20,18 @@ const CATALOGUE_DATA = {
         { name: "Men Slides", price: "₦45,000", image: "men_slides9.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
         { name: "Men Slides", price: "₦45,000", image: "men_slides10.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
         { name: "Men Slides", price: "₦45,000", image: "men_slides11.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+
+        { name: "Men Slides", price: "₦45,000", image: "men_slides12.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides13.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides14.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides15.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides16.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides17.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides18.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides19.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "₦45,000", image: "men_slides20.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+
+
         // Box Slides
         { name: "Box Slides", price: "₦100,000", image: "boxslide.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
         { name: "Box Slides", price: "₦100,000", image: "boxslide1.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
