@@ -2,7 +2,7 @@
 const CATALOGUE_DATA = {
     products: [
         // Featured Products
-        { name: "Men Slides", price: "₦45,000", image: "men_slides1.jpg", category: "trendy-slides", featured: true, description: "Stylish slides for casual wear." },
+        { name: "Female Slides", price: "₦35,000", image: "men_slides1.jpg", category: "trendy-slides", featured: true, description: "Stylish slides for casual wear." },
         { name: "Classic Brogues", price: "₦200,000", image: "brogues.jpg", category: "brogues", featured: true, description: "Classic brogues featuring decorative perforations and wingtip design." },
         { name: "Comfort Sneakers", price: "₦150,000", image: "casual_shoes.jpg", category: "casual-shoes", featured: true, description: "Everyday comfort, perfect for campus and city strolls." },
         { name: "Classic Loafers", price: "₦150,000", image: "loafers.jpg", category: "loafers", featured: true, description: "Classic slip-on shoes for versatile styling." },
