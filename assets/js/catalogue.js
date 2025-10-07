@@ -44,7 +44,7 @@ const CATALOGUE_DATA = {
         { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues5.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
         { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues6.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
         // Oxford
-        { name: "Classic Oxford", price: "₦260,000", image: "oxford.jpeg", category: "oxford", description: "Traditional Oxford shoes with closed lacing system." },
+        { name: "Classic Oxford", price: "₦200,000", image: "oxford.jpeg", category: "oxford", description: "Traditional Oxford shoes with closed lacing system." },
         { name: "Premium Oxford", price: "₦200,000", image: "oxford1.jpeg", category: "oxford", description: "Elegant Oxford shoes for formal occasions." },
         // Patina
         { name: "Patina Dress Shoes", price: "₦200,000", image: "patina.jpg", category: "patina", description: "Hand-painted patina finish for unique coloring." },
@@ -57,7 +57,7 @@ const CATALOGUE_DATA = {
         { name: "Comfort Loafers", price: "₦150,000", image: "loafers5.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         { name: "Comfort Loafers", price: "₦150,000", image: "loafers6.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         { name: "Comfort Loafers", price: "₦150,000", image: "loafers7.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦150,000", image: "loafers8.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        // { name: "Comfort Loafers", price: "₦150,000", image: "loafers8.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         { name: "Comfort Loafers", price: "₦150,000", image: "loafers9.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         { name: "Comfort Loafers", price: "₦150,000", image: "loafers10.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         // Suede Loafers
@@ -131,7 +131,7 @@ const CATALOGUE_DATA = {
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers1.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers2.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers3.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        // { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers3.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers5.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers6.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
