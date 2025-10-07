@@ -132,7 +132,7 @@ const CATALOGUE_DATA = {
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers1.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers2.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         // { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers3.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        // { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers5.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers6.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         // Female Slides
