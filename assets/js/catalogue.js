@@ -2,149 +2,154 @@
 const CATALOGUE_DATA = {
     products: [
         // Featured Products
-        { name: "Female Slides", price: "₦35,000", image: "men_slides1.jpg", category: "trendy-slides", featured: true, description: "Stylish slides for casual wear." },
-        { name: "Classic Brogues", price: "₦200,000", image: "brogues.jpg", category: "brogues", featured: true, description: "Classic brogues featuring decorative perforations and wingtip design." },
-        { name: "Comfort Sneakers", price: "₦180,000", image: "casual_shoes.jpg", category: "casual-shoes", featured: true, description: "Everyday comfort, perfect for campus and city strolls." },
-        { name: "Classic Loafers", price: "₦160,000", image: "loafers.jpg", category: "loafers", featured: true, description: "Classic slip-on shoes for versatile styling." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules.jpg", category: "mules", featured: true, description: "Backless elegance for an effortless and chic look." },
-        { name: "Elegant Shoe Sandal", price: "₦100,000", image: "shoe_sandals.jpg", category: "shoe-sandal", featured: true, description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Female Slides", price: "50,000", image: "men_slides1.jpg", category: "trendy-slides", featured: true, description: "Stylish slides for casual wear." },
+        { name: "Classic Brogues", price: "200,000", image: "brogues.jpg", category: "brogues", featured: true, description: "Classic brogues featuring decorative perforations and wingtip design." },
+        { name: "Comfort Sneakers", price: "180,000", image: "casual_shoes.jpg", category: "casual-shoes", featured: true, description: "Everyday comfort, perfect for campus and city strolls." },
+        { name: "Classic Loafers", price: "200,000", image: "loafers.jpg", category: "loafers", featured: true, description: "Classic slip-on shoes for versatile styling." },
+        { name: "Classic Mules", price: "100,000", image: "mules.jpg", category: "mules", featured: true, description: "Backless elegance for an effortless and chic look." },
+        { name: "Elegant Shoe Sandal", price: "100,000", image: "shoe_sandals.jpg", category: "shoe-sandal", featured: true, description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
         // Trendy Slides
-        { name: "Men Slides", price: "₦45,000", image: "men_slides.jpg", category: "trendy-slides", description: "Comfortable slip-on slides perfect for casual wear and relaxation." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides2.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides3.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides4.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides5.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides6.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides7.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides8.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides9.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides10.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides11.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides.jpg", category: "trendy-slides", description: "Comfortable slip-on slides perfect for casual wear and relaxation." },
+        { name: "Men Slides", price: "50,000", image: "men_slides2.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides3.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides4.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides5.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides6.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides7.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides8.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides9.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides10.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides11.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "70,000", image: "men_slides21.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "70,000", image: "men_slides22.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides23.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
 
-        { name: "Men Slides", price: "₦45,000", image: "men_slides12.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides13.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides14.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides15.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides16.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides17.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides18.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides19.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
-        { name: "Men Slides", price: "₦45,000", image: "men_slides20.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides12.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides13.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides14.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides15.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides16.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides17.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides18.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides19.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
+        { name: "Men Slides", price: "50,000", image: "men_slides20.jpg", category: "trendy-slides", description: "Stylish slides for casual wear." },
 
 
         // Box Slides
-        { name: "Box Slides", price: "₦100,000", image: "boxslide.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
-        { name: "Box Slides", price: "₦100,000", image: "boxslide1.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
-        { name: "Box Slides", price: "₦100,000", image: "boxslide2.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
+        { name: "Box Slides", price: "100,000", image: "boxslide.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
+        { name: "Box Slides", price: "100,000", image: "boxslide1.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
+        { name: "Box Slides", price: "100,000", image: "boxslide2.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
+        { name: "Box Slides", price: "100,000", image: "boxslide3.jpeg", category: "box-slides", description: "Stylish box slides for casual wear." },
+
         // Brogues
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues1.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues2.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues3.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues4.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues5.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
-        { name: "Handcrafted Brogues", price: "₦200,000", image: "brogues6.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues1.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues2.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues3.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues4.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues5.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
+        { name: "Handcrafted Brogues", price: "200,000", image: "brogues6.jpeg", category: "brogues", description: "Hand-colored leather brogues with traditional perforations." },
         // Oxford
-        { name: "Classic Oxford", price: "₦200,000", image: "oxford.jpeg", category: "oxford", description: "Traditional Oxford shoes with closed lacing system." },
-        { name: "Premium Oxford", price: "₦200,000", image: "oxford1.jpeg", category: "oxford", description: "Elegant Oxford shoes for formal occasions." },
+        { name: "Classic Oxford", price: "200,000", image: "oxford.jpeg", category: "oxford", description: "Traditional Oxford shoes with closed lacing system." },
+        { name: "Premium Oxford", price: "200,000", image: "oxford1.jpeg", category: "oxford", description: "Elegant Oxford shoes for formal occasions." },
         // Patina
-        { name: "Patina Dress Shoes", price: "₦200,000", image: "patina.jpg", category: "patina", description: "Hand-painted patina finish for unique coloring." },
-        { name: "Premium Patina", price: "₦200,000", image: "patina2.jpeg", category: "patina", description: "Artistic patina coloring with premium leather." },
-        { name: "Luxury Patina", price: "₦200,000", image: "patina3.jpeg", category: "patina", description: "Handcrafted patina with artistic color gradients." },
+        { name: "Patina Dress Shoes", price: "200,000", image: "patina.jpg", category: "patina", description: "Hand-painted patina finish for unique coloring." },
+        { name: "Premium Patina", price: "200,000", image: "patina2.jpeg", category: "patina", description: "Artistic patina coloring with premium leather." },
+        { name: "Luxury Patina", price: "200,000", image: "patina3.jpeg", category: "patina", description: "Handcrafted patina with artistic color gradients." },
         // Loafers
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers2.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers3.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers4.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers5.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers6.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers7.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        // { name: "Comfort Loafers", price: "₦150,000", image: "loafers8.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers9.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
-        { name: "Comfort Loafers", price: "₦160,000", image: "loafers10.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers2.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers3.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers4.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers5.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers6.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers7.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        // { name: "Comfort Loafers", price: "150,000", image: "loafers8.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers9.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
+        { name: "Comfort Loafers", price: "160,000", image: "loafers10.jpeg", category: "loafers", description: "Effortless style for relaxed outings and social events." },
         // Suede Loafers
-        { name: "Premium Suede Loafers", price: "₦160,000", image: "formal_shoes2.jpg", category: "suede-loafers", description: "Luxurious suede loafers for smart-casual occasions." },
-        { name: "Classic Suede Loafers", price: "₦160,000", image: "suede1.jpeg", category: "suede-loafers", description: "Soft suede texture with comfortable fit." },
-        { name: "Suede Loafers", price: "₦160,000", image: "suede2.jpeg", category: "suede-loafers", description: "Luxurious suede loafers for smart-casual occasions." },
-        { name: "Classic Suede Loafers", price: "₦160,000", image: "suede_loafers.jpg", category: "suede-loafers", description: "Soft suede texture with comfortable fit." },
+        { name: "Premium Suede Loafers", price: "160,000", image: "formal_shoes2.jpg", category: "suede-loafers", description: "Luxurious suede loafers for smart-casual occasions." },
+        { name: "Classic Suede Loafers", price: "160,000", image: "suede1.jpeg", category: "suede-loafers", description: "Soft suede texture with comfortable fit." },
+        { name: "Suede Loafers", price: "160,000", image: "suede2.jpeg", category: "suede-loafers", description: "Luxurious suede loafers for smart-casual occasions." },
+        { name: "Classic Suede Loafers", price: "160,000", image: "suede_loafers.jpg", category: "suede-loafers", description: "Soft suede texture with comfortable fit." },
         // Casual Shoes
-        { name: "Casual", price: "₦150,000", image: "white_cup_soles.jpg", category: "casual-shoes", description: "Effortless style for relaxed outings." },
-        { name: "Casual", price: "₦150,000", image: "casual1.jpeg", category: "casual-shoes", description: "Classic low-top comfort." },
-        { name: "Casual", price: "₦180,000", image: "casual2.jpeg", category: "casual-shoes", description: "Effortless style for relaxed outings." },
-        { name: "Casual", price: "₦150,000", image: "casual3.jpeg", category: "casual-shoes", description: "Designed for all-day ease." },
+        { name: "Casual", price: "150,000", image: "white_cup_soles.jpg", category: "casual-shoes", description: "Effortless style for relaxed outings." },
+        { name: "Casual", price: "150,000", image: "casual1.jpeg", category: "casual-shoes", description: "Classic low-top comfort." },
+        { name: "Casual", price: "180,000", image: "casual2.jpeg", category: "casual-shoes", description: "Effortless style for relaxed outings." },
+        { name: "Casual", price: "150,000", image: "casual3.jpeg", category: "casual-shoes", description: "Designed for all-day ease." },
         // Corporate Shoes
-        { name: "Corporate Casual", price: "₦160,000", image: "coperate.jpeg", category: "corporate-shoes", description: "Professional yet comfortable for office wear." },
-        { name: "Business Formal", price: "₦160,000", image: "coperate1.jpeg", category: "corporate-shoes", description: "Perfect for business meetings and corporate events." },
-        { name: "Executive Shoes", price: "₦160,000", image: "coperate2.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for executives." },
-        { name: "Professional Shoes", price: "₦160,000", image: "coperate3.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for professionals." },
-        { name: "Business Leather Shoes", price: "₦160,000", image: "coperate4.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for business." },
-        { name: "Corporate Dress Shoes", price: "₦160,000", image: "coperate5.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for corporate dress." },
-        { name: "Premium Corporate Shoes", price: "₦160,000", image: "coperate6.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for premium corporate wear." },
+        { name: "Corporate Casual", price: "160,000", image: "coperate.jpeg", category: "corporate-shoes", description: "Professional yet comfortable for office wear." },
+        { name: "Business Formal", price: "160,000", image: "coperate1.jpeg", category: "corporate-shoes", description: "Perfect for business meetings and corporate events." },
+        { name: "Executive Shoes", price: "160,000", image: "coperate2.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for executives." },
+        { name: "Professional Shoes", price: "160,000", image: "coperate3.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for professionals." },
+        { name: "Business Leather Shoes", price: "160,000", image: "coperate4.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for business." },
+        { name: "Corporate Dress Shoes", price: "160,000", image: "coperate5.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for corporate dress." },
+        { name: "Premium Corporate Shoes", price: "160,000", image: "coperate6.jpeg", category: "corporate-shoes", description: "Hand-colored leather shoes for premium corporate wear." },
         // Mules
-        { name: "Classic Mules", price: "₦90,000", image: "mules1.jpg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules2.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules3.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules4.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules5.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules6.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules7.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
-        { name: "Classic Mules", price: "₦90,000", image: "mules8.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules1.jpg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules2.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules3.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules4.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules5.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules6.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules7.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
+        { name: "Classic Mules", price: "90,000", image: "mules8.jpeg", category: "mules", description: "Backless elegance for an effortless and chic look." },
         // Shoe Sandal
-        { name: "Shoe Sandal", price: "₦100,000", image: "shoe_sandals1.jpg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
-        { name: "Shoe Sandal", price: "₦100,000", image: "shoe_sandals2.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
-        { name: "Shoe Sandal", price: "₦100,000", image: "shoe_sandals3.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
-        { name: "Shoe Sandal", price: "₦100,000", image: "shoe_sandals4.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
-        { name: "Shoe Sandal", price: "₦100,000", image: "shoe_sandals5.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Shoe Sandal", price: "100,000", image: "shoe_sandals1.jpg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Shoe Sandal", price: "100,000", image: "shoe_sandals2.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Shoe Sandal", price: "100,000", image: "shoe_sandals3.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Shoe Sandal", price: "100,000", image: "shoe_sandals4.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
+        { name: "Shoe Sandal", price: "100,000", image: "shoe_sandals5.jpeg", category: "shoe-sandal", description: "Elegant open-toe sandals combining comfort with sophisticated styling." },
         // Birkenstock
-        { name: "Classic Birkenstock Sandals", price: "₦50,000", image: "birkenstock.jpg", category: "birkenstock", description: "Comfortable cork footbed sandals with adjustable straps for perfect fit." },
-        { name: "Classic Birkenstock Sandals", price: "₦50,000", image: "birkenstock1.jpg", category: "birkenstock", description: "Comfortable cork footbed sandals with adjustable straps for perfect fit." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock2.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock3.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock4.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock5.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock6.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
-        { name: "Premium Birkenstock Sandals", price: "₦50,000", image: "birkenstock7.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Classic Birkenstock Sandals", price: "50,000", image: "birkenstock.jpg", category: "birkenstock", description: "Comfortable cork footbed sandals with adjustable straps for perfect fit." },
+        { name: "Classic Birkenstock Sandals", price: "50,000", image: "birkenstock1.jpg", category: "birkenstock", description: "Comfortable cork footbed sandals with adjustable straps for perfect fit." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock2.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock3.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock4.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock5.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock6.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
+        { name: "Premium Birkenstock Sandals", price: "50,000", image: "birkenstock7.jpeg", category: "birkenstock", description: "High-quality leather Birkenstock sandals with anatomical footbed support." },
         // Accessories
-        { name: "Handcrafted Wallet", price: "From ₦25,000", image: "leather_wallet.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
-        { name: "Handcrafted Wallet", price: "From ₦25,000", image: "wallet.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
-        { name: "Handcrafted Wallet", price: "From ₦25,000", image: "wallet1.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
-        { name: "Handcrafted Wallet", price: "From ₦25,000", image: "wallet2.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
-        { name: "Handcrafted Wallet", price: "From ₦25,000", image: "wallet3.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
-        { name: "Premium Leather Belt", price: "From ₦30,000", image: "belt.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
-        { name: "Premium Leather Belt", price: "From ₦30,000", image: "belt1.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
-        { name: "Premium Leather Belt", price: "From ₦30,000", image: "leather_belt.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
+        { name: "Handcrafted Wallet", price: "From 25,000", image: "leather_wallet.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
+        { name: "Handcrafted Wallet", price: "From 25,000", image: "wallet.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
+        { name: "Handcrafted Wallet", price: "From 25,000", image: "wallet1.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
+        { name: "Handcrafted Wallet", price: "From 25,000", image: "wallet2.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
+        { name: "Handcrafted Wallet", price: "From 25,000", image: "wallet3.jpg", category: "accessories", description: "Premium leather wallet with meticulous craftsmanship." },
+        { name: "Premium Leather Belt", price: "From 30,000", image: "belt.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
+        { name: "Premium Leather Belt", price: "From 30,000", image: "belt1.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
+        { name: "Premium Leather Belt", price: "From 30,000", image: "leather_belt.jpg", category: "accessories", description: "Handmade leather belt with quality buckle hardware." },
         // Boots
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot1.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot2.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot3.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot4.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot5.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot6.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot7.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot8.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
-        { name: "Classic Leather Boots", price: "₦200,000 -₦250,000", image: "boot9.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot1.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot2.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot3.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot4.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot5.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot6.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot7.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot8.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
+        { name: "Classic Leather Boots", price: "250,000", image: "boot9.jpeg", category: "boots", description: "Handcrafted leather boots with premium construction and durability." },
         // Cup Soles
-        { name: "Cup Sole", price: "₦150,000", image: "cupsoles.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
-        { name: "White Cup Sole", price: "₦150,000", image: "cupsoles1.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
-        { name: "White Cup Sole", price: "₦150,000", image: "cupsoles2.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
-        { name: "White Cup Sole", price: "₦150,000", image: "cupsoles3.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
+        { name: "Cup Sole", price: "150,000", image: "cupsoles.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
+        { name: "White Cup Sole", price: "150,000", image: "cupsoles1.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
+        { name: "White Cup Sole", price: "150,000", image: "cupsoles2.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
+        { name: "White Cup Sole", price: "150,000", image: "cupsoles3.jpeg", category: "cup-soles", description: "Modern sneakers with distinctive cup sole construction for enhanced comfort." },
         // Platform Slippers
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers1.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers2.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        // { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers3.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        // { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers5.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
-        { name: "Platform Slippers", price: "₦45,000", image: "platform_slipers6.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        { name: "Platform Slippers", price: "45,000", image: "platform_slipers.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        { name: "Platform Slippers", price: "45,000", image: "platform_slipers1.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        { name: "Platform Slippers", price: "45,000", image: "platform_slipers2.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        // { name: "Platform Slippers", price: "45,000", image: "platform_slipers3.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        // { name: "Platform Slippers", price: "45,000", image: "platform_slipers4.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        { name: "Platform Slippers", price: "45,000", image: "platform_slipers5.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
+        { name: "Platform Slippers", price: "45,000", image: "platform_slipers6.jpeg", category: "platform-slippers", description: "Stylish platform slippers with elevated sole for added height and comfort." },
         // Female Slides
-        { name: "Female Slides", price: "₦35,000", image: "female_slides.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides2.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides3.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides4.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides5.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides6.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides7.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides8.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
-        { name: "Female Slides", price: "₦35,000", image: "female_slides9.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides2.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides3.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides4.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides5.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides6.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides7.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides8.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
+        { name: "Female Slides", price: "50,000", image: "female_slides9.jpg", category: "female-slides", description: "Stylish and comfortable slides designed for women, perfect for casual outings." },
     ],
 
     categories: [
@@ -180,6 +185,27 @@ class CatalogueManager {
         this.searchTimeout = null;
         this.stickyTabsObserver = null;
         this.cardCache = new Map(); // Cache rendered cards
+    }
+
+    /**
+     * Formats a raw price string by ensuring exactly one ₦ symbol is present.
+     * Handles plain numbers ("50,000"), prefixed ("₦50,000"), and
+     * "From …" patterns ("From 25,000" → "From ₦25,000").
+     *
+     * @param {string} raw - The price value from the product data.
+     * @returns {string} - The formatted price string with a single ₦ symbol.
+     */
+    formatPrice(raw) {
+        // Strip any existing ₦ signs first so we never double-up
+        const cleaned = raw.replace(/₦/g, '').trim();
+
+        // "From <amount>" pattern
+        if (/^from\s+/i.test(cleaned)) {
+            return cleaned.replace(/^(from\s+)/i, 'From ₦');
+        }
+
+        // Plain numeric / comma-separated amount
+        return `₦${cleaned}`;
     }
 
     init() {
@@ -311,6 +337,7 @@ class CatalogueManager {
         if (product.featured) card.dataset.featured = 'true';
 
         const imageSrc = `../assets/images/shoes/${product.image}`;
+        const displayPrice = this.formatPrice(product.price); // ← single ₦ applied here
 
         card.innerHTML = `
             <div class="shoe-image-container">
@@ -326,9 +353,9 @@ class CatalogueManager {
             </div>
             <div class="shoe-card-content">
                 <h3>${product.name}</h3>
-                <div class="shoe-price">${product.price}</div>
+                <div class="shoe-price">${displayPrice}</div>
                 <p class="shoe-description">${product.description}</p>
-                <button class="order-button" data-shoe="${product.name}" data-price="${product.price}" data-category="${product.category}">Order Now</button>
+                <button class="order-button" data-shoe="${product.name}" data-price="${displayPrice}" data-category="${product.category}">Order Now</button>
             </div>
         `;
 
@@ -338,7 +365,7 @@ class CatalogueManager {
             e.preventDefault();
             const img = imageContainer.querySelector('img');
             if (window.openImageViewer) {
-                window.openImageViewer(img, product.name, product.price);
+                window.openImageViewer(img, product.name, displayPrice);
             }
         });
 
